@@ -1,0 +1,74 @@
+[
+  {
+    "model": "quotes",
+    "pk": 1,
+    "fields": {
+      "content": "If you only read the books that everyone else is reading, you can only think what everyone else is thinking.",
+      "author": "Haruki Murakami"
+    }
+  },
+  {
+    "model": "quotes",
+    "pk": 2,
+    "fields": {
+      "content": "Books are a uniquely portable magic.",
+      "author": "Stephen King"
+    }
+  },  {
+    "model": "quotes",
+    "pk": 3,
+    "fields": {
+      "content": "Reading is important. If you know how to read then the whole world opens up to you.",
+      "author": "Barack Obama"
+    }
+  },  {
+    "model": "quotes",
+    "pk": 4,
+    "fields": {
+      "content": "In books lies the soul of the whole past time.",
+      "author": "Thomas Carlyle"
+    }
+  },  {
+    "model": "quotes",
+    "pk": 5,
+    "fields": {
+      "content": "The instruction we find in books is like fire. We fetch it from our neighbours, kindle it at home, communicate it to others, and it becomes the property of all.",
+      "author": "Voltaire"
+    }
+  },  {
+    "model": "quotes",
+    "pk": 6,
+    "fields": {
+      "content": "You don’t have to burn books to destroy a culture. Just get people to stop reading them.",
+      "author": "Mahatma Gandhi"
+    }
+  },  {
+    "model": "quotes",
+    "pk": 7,
+    "fields": {
+      "content": "A room without books is like a body without a soul.",
+      "author": "Marcus Tullius Cicero"
+    }
+  },  {
+    "model": "quotes",
+    "pk": 8,
+    "fields": {
+      "content": "I think of life as a good book. The further you get into it, the more it begins to make sense.",
+      "author": "Harold Kushner"
+    }
+  },  {
+    "model": "quotes",
+    "pk": 9,
+    "fields": {
+      "content": "Books are mirrors: you only see in them what you already have inside you.",
+      "author": "Carlos Ruiz Zafón"
+    }
+  },  {
+    "model": "quotes",
+    "pk": 10,
+    "fields": {
+      "content": "There is a great deal of difference between an eager man who wants to read a book and the tired man who wants a book to read.",
+      "author": "Gilbert K. Chesterton"
+    }
+  }
+]

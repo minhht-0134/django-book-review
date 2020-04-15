@@ -1,0 +1,19 @@
+{% load static %}
+<div class="row align-items-center latest_product_inner">
+    {% for book in books %}
+        <div class="col-lg-4 col-sm-6">
+            <div class="single_product_item">
+                <img src="{{ book.image_url }}" alt="">
+                <div class="single_product_text">
+                    <h4>{{ book.title }}</h4>
+                    <h3>- {{ book.author }}</h3>
+                    <a href="#" class="add_cart textCenter">review</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="col-lg-12">
+        {% include 'mainpage/pagination.html' %}
+    </div>
+</div>

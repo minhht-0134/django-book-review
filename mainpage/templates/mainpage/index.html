@@ -1,0 +1,37 @@
+{% extends 'layouts/index.html' %}
+{% load static %}
+{% block title %}
+    Home | {{ block.super }}
+{% endblock %}
+{% block content %}
+    <section class="cat_product_area section_padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="section_tittle text-center">
+                           <h2>BookDev</h2>
+                            <p>BookDev <span>-</span> Home</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    {% include 'mainpage/left_sidebar.html' %}
+                </div>
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            {% include 'mainpage/product_top_bar.html' %}
+                        </div>
+                    </div>
+
+                    {% include 'mainpage/items_center.html' %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="product_list best_seller">
+        {% include 'mainpage/best_books.html' %}
+    </section>
+{% endblock %}

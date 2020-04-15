@@ -1,0 +1,18 @@
+{% load static %}
+<div class="left_sidebar_area">
+    <aside class="left_widgets p_filter_widgets">
+        <div class="l_w_title">
+            <h3>Browse Categories</h3>
+        </div>
+        <div class="widgets_inner">
+            <ul class="list">
+                {% for category in categories %}
+                    <li>
+                        <a href="#">{{ category.name }}</a>
+                        <span>{{ category.get_book }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </aside>
+</div>
