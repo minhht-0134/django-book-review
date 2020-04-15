@@ -2,15 +2,35 @@
 <div class="left_sidebar_area">
     <aside class="left_widgets p_filter_widgets">
         <div class="l_w_title">
-            <h3>Browse Categories</h3>
+            <h3>Categories (<span class="active_cate">{{ book_count }}</span>)</h3>
         </div>
         <div class="widgets_inner">
             <ul class="list">
+
+                <li>
+                    {% if q_category == 'all' %}
+                        <a class="active_cate" href="?category=all&page=1">All</a>
+                        <span class="active_cate">{{ book_count }}</span>
+                    {% else %}
+                        <a href="?category=all&page=1">All</a>
+                        <span>{{ book_count }}</span>
+                    {% endif %}
+                </li>
+
                 {% for category in categories %}
-                    <li>
-                        <a href="#">{{ category.name }}</a>
-                        <span>{{ category.get_book }}</span>
-                    </li>
+                    {% if category.id == q_category %}
+                        <li>
+                            <a class="active_cate" href="?category={{ category.id }}&page=1">
+                                {{ category.name }}
+                            </a>
+                            <span class="active_cate">{{ category.get_book }}</span>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="?category={{ category.id }}&page=1">{{ category.name }}</a>
+                            <span>{{ category.get_book }}</span>
+                        </li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </div>

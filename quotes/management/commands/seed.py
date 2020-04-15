@@ -229,7 +229,7 @@ def create_books():
             'title': 'Làm Ít Được Nhiều',
             'image_url': 'https://sachvui.com/cover2/2019/lam-it-duoc-nhieu.jpg',
             'author': 'Chin Ning Chu',
-            'pages': 76
+            'pages': 123
         },
         {
             'title': "Khi Người Ta Tư Duy",
@@ -241,7 +241,7 @@ def create_books():
             'title': 'Làm Ít Được Nhiều',
             'image_url': 'https://sachvui.com/cover2/2019/lam-it-duoc-nhieu.jpg',
             'author': 'Chin Ning Chu',
-            'pages': 76
+            'pages': 123
         }
     ]
     book = None
@@ -256,6 +256,7 @@ def create_books():
             pages=data.get('pages'),
             image_url=data.get('image_url'),
             category=random.choice(ids),
+            # category=ids[0],
         )
         book.save()
     print('Books created!')

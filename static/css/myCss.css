@@ -55,3 +55,7 @@
 a.disabled {
     pointer-events: none;
 }
+
+.active_cate {
+    color: #ff3368 !important;
+}

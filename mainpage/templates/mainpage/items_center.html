@@ -12,6 +12,9 @@
             </div>
         </div>
     {% endfor %}
+    {% if total_book == 0 %}
+        <p>No items!</p>
+    {% endif %}
 
     <div class="col-lg-12">
         {% include 'mainpage/pagination.html' %}
