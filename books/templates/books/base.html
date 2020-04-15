@@ -14,6 +14,8 @@
           <div class="dropdown-item" onclick=window.location.href='{% url "logout" %}'>Logout</div>
         </div>
       </div>
+    {% else %}
+      <h4 class="clickable" onclick=window.location.href='{% url "signup" %}'>Signup</h4>
     {% endif %}
   </div>
 </nav>

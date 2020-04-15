@@ -13,5 +13,5 @@ urlpatterns = [
   path('users/<int:pk>/', login_required(views.UserDetailView.as_view()), name="user_detail"),
   path('accounts/login/', views.accountsLogin),
   path('accounts/logout/', views.accountsLogout, name='logout'),
-  path('accounts/signup/', views.accountsSignup),
+  path('accounts/signup/', views.accountsSignup, name='signup'),
 ]
