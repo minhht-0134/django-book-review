@@ -1,0 +1,16 @@
+{% extends "books/base.html" %}
+{% load static %}
+
+{% block page_content %}
+  {% csrf_token %}
+  <link rel="stylesheet" type="text/css" href="{% static '/styles/books/style.css' %}">
+  <br>
+  <div class="row" id="user_detail" data-user-id="{{ object.id }}">
+    {% include 'books/user_detail_info.html' with user=object %}
+    {% include 'books/user_detail_activities.html' %}
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script src="{% static '/javascripts/books/user_detail.js' %}"></script>
+{% endblock %}

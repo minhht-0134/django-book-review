@@ -1,0 +1,26 @@
+{% extends "books/base.html" %}
+{% load bootstrap4 %}
+
+{% block page_content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-sm"></div>
+      <div class="col-sm">
+        <br>
+        <h1>Login</h1>
+        <form acrion="/accounts/signup" method="post">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          {% if next is not None %}
+            <input type="text" name="next" value="{{ next }}" style="display: none;">
+          {% endif %}
+          {% buttons %}
+            <button type="submit" class="btn btn-primary">
+              Submit
+            </button>
+          {% endbuttons %}
+        </form>
+      </div>
+      <div class="col-sm"></div>
+  </div>
+{% endblock %}

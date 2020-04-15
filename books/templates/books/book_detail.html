@@ -1,0 +1,17 @@
+{% extends "books/base.html" %}
+{% load static %}
+
+{% block page_content %}
+  {% csrf_token %}
+  <link rel="stylesheet" type="text/css" href="{% static '/styles/books/style.css' %}">
+  <br>
+  <div class="row" id="book_detail" data-book-id="{{ object.id }}" data-username="{{ request.user }}">
+    {% include 'books/book_detail_info.html' with book=object user=request.user %}
+    {% include 'books/book_detail_reviews.html' %}
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script src="{% static '/javascripts/books/book_detail_reviews.js' %}"></script>
+  <script src="{% static '/javascripts/books/book_detail_info.js' %}"></script>
+{% endblock %}

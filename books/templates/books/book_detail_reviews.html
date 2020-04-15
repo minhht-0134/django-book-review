@@ -1,0 +1,73 @@
+<div class="col-md book_reviews">
+  <div class="form-group">
+    <div class="row pr-3">
+      <div class="col">
+        <input type="text" name="review" class="form-control" placeholder="write some your review">
+      </div>
+      <div>
+        <button class="btn btn-primary" id="review_button">Submit</button>
+      </div>
+    </div>
+  </div>
+  <div class="book_review d-none">
+    <h6></h6>
+    <div class="book_review_detail">
+      <h6 class="book_review_content"></h6>
+      <div class="book_review_action row float-right">
+        <h6 class="delele">Delele</h6>
+        <h6 class="edit">Edit</h6>
+        <h6 class="reply">Reply</h6>
+      </div>
+    </div>
+    <div class="book_review_comment_list">
+    </div>
+  </div>
+  <div class="book_review_comment_form d-none">
+    <h6></h6>
+    <div class="row mr-0">
+      <div class="col">
+        <input type="text" name="comment" class="form-control">
+      </div>
+      <div>
+        <button class="btn btn-primary submit_comment" type="submit">Send</button>
+      </div>
+    </div>
+  </div>
+  <div class="book_review_comment d-none">
+    <h6></h6>
+    <div class="book_review_comment_detail">
+      <h6 class="book_review_comment_content"></h6>
+    </div>
+  </div>
+  <div class="book_review_list overflow-auto">
+    {% for review in object.reviews %}
+      <div class="book_review" data-id="{{ review.id }}">
+        <h6 class="clickable" onclick=window.location.href='{% url "user_detail" review.user.id %}'>
+          {{ review.user }}
+        </h6>
+        <div class="book_review_detail">
+          <h6 class="book_review_content">"{{ review.content }}"</h6>
+          <div class="book_review_action row float-right">
+            {% if review.user.id == request.user.id %}
+              <h6 class="delele">Delele</h6>
+              <h6 class="edit">Edit</h6>
+            {% endif %}
+            <h6 class="reply">Reply</h6>
+          </div>
+        </div>
+        <div class="book_review_comment_list">
+          {% for comment in review.comments %}
+            <div class="book_review_comment">
+              <h6 class="clickable" onclick=window.location.href='{% url "user_detail" comment.user.id %}'>
+                {{ comment.user }}
+              </h6>
+              <div class="book_review_comment_detail activity-{{ comment.id }}">
+                <h6 class="book_review_comment_content">"{{ comment.content }}"</h6>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>

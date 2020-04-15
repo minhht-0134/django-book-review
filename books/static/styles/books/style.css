@@ -1,0 +1,171 @@
+.clickable {
+  cursor: pointer;
+}
+
+.book {
+  height: 320px;
+  min-width: 25vh;
+  max-width: 25vh;
+  background: lightblue;
+  padding: 20px;
+  margin: 10px;
+  color: steelblue;
+}
+
+.book_extra_info {
+  position: absolute;
+  bottom: 0px;
+  padding-bottom: 20px;
+}
+
+.book_review_list {
+  height: 70vh;
+}
+
+.book_info, .user_info {
+  max-width: 50%;
+  word-wrap: break-word;
+}
+
+.book_info_action .active {
+  color: saddlebrown;
+  background: burlywood;
+}
+
+.book_info_action .disactive {
+  color: burlywood;
+  background: antiquewhite;;
+}
+
+.book_info_action h6 {
+  width: 100px;
+  text-align: center;
+  padding: 5px 15px;
+  margin-left: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.book_reviews, .user_activities {
+  max-width: 50%;
+}
+
+.book_review {
+  word-wrap: break-word;
+  padding-left: 10px;
+}
+
+.book_review_detail {
+  padding: 10px;
+  padding-bottom: 25px;
+  margin-right: 50px;
+  border-radius: 10px;
+  background: lightblue;
+}
+
+.book_review_detail:hover .book_review_action {
+  display: flex;
+}
+
+.book_review_content {
+  font-style: italic;
+}
+
+.book_review_comment {
+  padding-top: 10px;
+}
+
+.book_review_comment_list {
+  text-align: right;
+  padding: 10px;
+  padding-left: 50px;
+}
+
+.book_review_comment_detail {
+  padding: 10px;
+  border-radius: 10px;
+  background: lightblue;
+}
+
+.book_review_comment_content {
+  font-style: italic;
+}
+
+.book_review_action {
+  display: none;
+  margin-top: 0px;
+  margin-right: 0px;
+  color: cadetblue;
+}
+
+.book_review_action h6 {
+  font-size: 0.8rem;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.user_info .follow_button {
+  margin-bottom: 15px;
+  min-width: 150px;
+}
+
+.user_info .statistic div {
+  padding: 5px 5px 5px 10px;
+}
+
+.user_info .statistic span {
+  padding-left: 10px;
+  padding-top: 8px;
+}
+
+.user_info .number {
+  padding: 10px;
+  color: peru;
+  background: wheat;
+  border-radius: 20px;
+  height: 40px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.user_info .username {
+  padding: 10px;
+  color: peru;
+  background: wheat;
+  border-radius: 20px;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 40px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.user_activities .targetname {
+  margin-top: -1px;
+  font-weight: bold;
+}
+
+.user_info .extra_list {
+  position: absolute;
+  left: 150px;
+  margin-top: -5px;
+}
+
+.user_activities .activity {
+  padding: 10px;
+  padding-bottom: 25px;
+  margin-right: 20px;
+  border-radius: 10px;
+  background: lightblue;
+  margin-bottom: 10px;
+}
+
+.user_activities .activity .time {
+  font-size: 0.8rem;
+}
+
+.user_activities .activity_list {
+  height: 80vh;
+}

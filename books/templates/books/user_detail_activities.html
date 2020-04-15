@@ -1,0 +1,31 @@
+<div class="col-md user_activities">
+  <div class="activity_list overflow-auto">
+    {% for activity in activities %}
+      <div class="activity {{ activity.status_text }}">
+        <div class="row pl-3">
+          {% if activity.action_type == 1 %}
+            Review
+          {% elif activity.action_type == 5 %}
+            Request buy
+          {% else %}
+            {{ activity.status_text }}
+          {% endif %}
+          <h5
+            class="targetname clickable pl-1"
+            onclick=window.location.href="/{{ activity.target_object_type.name }}s/{{ activity.target_object_id }}"
+          >
+            {{ activity.target_object }}
+          </h5>
+        </div>
+        {% if activity.action_type == 1 %}
+          <div class="font-italic text-right">
+            "{{ activity.content }}"
+          </div>
+        {% endif %}
+        <div class="time">
+          {{ activity.created_at }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>

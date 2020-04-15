@@ -1,0 +1,110 @@
+<div class="col-md user_info">
+  <h1 class="font-weight-bold">{{ user }}</h1>
+  <br>
+  {% if user.id != request.user.id %}
+    {% if follow_act is None %}
+      <button
+        class="btn btn-primary follow_button"
+        data-target-id="{{ user.id }}"
+      >
+        Follow
+      </button>
+    {% else %}
+      <button
+        class="btn btn-primary follow_button"
+        data-target-id="{{ user.id }}"
+        data-activity-id="{{ follow_act.id }}"
+      >
+        UnFollow
+      </button>
+    {% endif %}
+  {% endif %}
+  <div class="statistic">
+    <div class="row">
+      <span class="number">{{ following_count }}</span>
+      <span>following</span>
+      <div class="row extra_list">
+        {% for user in following_users %}
+          <span
+            class="username clickable"
+            onclick=window.location.href='{% url "user_detail" user.id %}'
+          >
+            {{ user }}
+          </span>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="row">
+      <span class="number">{{ followed_count }}</span>
+      <span>follower</span>
+      <div class="row extra_list">
+        {% for user in followed_users %}
+          <span
+            class="username clickable"
+            onclick=window.location.href='{% url "user_detail" user.id %}'
+          >
+            {{ user }}
+          </span>
+        {% endfor %}
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <span class="number">{{ reading_count }}</span>
+      <span>reading</span>
+      <div class="row extra_list">
+        {% for book in reading_books %}
+          <span
+            class="username clickable"
+            onclick=window.location.href='{% url "book_detail" book.id %}'
+          >
+            {{ book }}
+          </span>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="row">
+      <span class="number">{{ readed_count }}</span>
+      <span>readed</span>
+      <div class="row extra_list">
+        {% for book in readed_books %}
+          <span
+            class="username clickable"
+            onclick=window.location.href='{% url "book_detail" book.id %}'
+          >
+            {{ book }}
+          </span>
+        {% endfor %}
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <span class="number">{{ favorite_count }}</span>
+      <span>favorites</span>
+      <div class="row extra_list">
+        {% for book in favorite_books %}
+          <span
+            class="username clickable"
+            onclick=window.location.href='{% url "book_detail" book.id %}'
+          >
+            {{ book }}
+          </span>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="row">
+      <span class="number">{{ review_count }}</span>
+      <span>reviews</span>
+      <div class="row extra_list">
+        {% for review in reviews %}
+          <span
+            class="username clickable"
+            onclick=window.location.href='{% url "book_detail" review.target_object_id %}'
+          >
+            {{ review.content }}
+          </span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

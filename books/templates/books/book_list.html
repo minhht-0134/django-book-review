@@ -1,0 +1,28 @@
+{% extends "books/base.html" %}
+{% load static %}
+
+{% block page_content %}
+  <link rel="stylesheet" type="text/css" href="{% static '/styles/books/style.css' %}">
+  <br>
+  <h2>Book list</h2>
+  {% if object_list %}
+    <div class="row book_list">
+      {% for book in object_list %}
+        <div onclick=window.location.href='{% url "book_detail" book.id %}'>
+          <div class="col-sm container book clickable" >
+            <div>
+              <h4>{{ book.title }}</h4>
+              {{ book.author.full_name }}
+            </div>
+            <br>
+            <div class="book_extra_info">
+              {{ book.pub_date }}
+              <br>
+              {{ book.number_of_pages }} trang
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endblock %}

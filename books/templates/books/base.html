@@ -1,0 +1,23 @@
+{% load bootstrap4 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+<nav class="navbar navbar-light bg-dark text-secondary">
+  <div class="container">
+    <h1 class="clickable" onclick=window.location.href='{% url "book_list" %}'><a>Book store</a></h1>
+    {% if request.user.id is not None %}
+      <div class="dropdown">
+        <h4 class="clickable" id="dropdownMenuButton" data-toggle="dropdown">{{ request.user }}</h4>
+        <div class="dropdown-menu dropdown-menu-right clickable" aria-labelledby="dropdownMenuButton">
+          <div class="dropdown-item" onclick=window.location.href='{% url "user_detail" request.user.id %}'>Profile</div>
+          <div class="dropdown-item" onclick=window.location.href='{% url "logout" %}'>Logout</div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</nav>
+<div class="container">
+  {% block page_content %}{% endblock %}
+  {% block script %}{% endblock %}
+</div>

@@ -1,0 +1,38 @@
+<div class="col-md book_info">
+  <h1 class="font-weight-bold">{{ book.title }}</h1>
+  <br>
+  <h6>{{ book.author }}</h6>
+  <h6>{{ book.pub_date }}</h6>
+  <h6>{{ book.number_of_pages }}pages</h6>
+  <br>
+  <div class="book_info_action row">
+    <div class="read">
+      {% if read is None %}
+        <h6 class="disactive">Unread</h6>
+      {% else %}
+        <h6 class="active" data-id="{{ read.id }}" data-status="{{ read.status }}">
+          {{ read.status_text }}
+        </h6>
+      {% endif %}
+    </div>
+    <div class="favorite">
+      {% if favorite is None %}
+        <h6 class="disactive">Favorite</h6>
+      {% else %}
+        <h6 class="active" data-id="{{ favorite.id }}" data-status="{{ favorite.status }}">
+          {{ favorite.status_text }}
+        </h6>
+      {% endif %}
+    </div>
+    <div class="buy">
+      {% if buy is None %}
+        <h6 class="disactive">Buy</h6>
+      {% else %}
+        <h6 class="active" data-id="{{ buy.id }}" data-status="{{ buy.status }}">
+          {{ buy.status_text }}
+        </h6>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
