@@ -12,7 +12,8 @@ class BookListView(ListView):
 
   def get_queryset(self):
     filter_params = dict(self.request.GET)
-    user_id = filter_params.get('user_id', [self.request.user.id])[0]
+    user_id = filter_params.get('user_id', [None])[0]
+    if user_id is None or user_id == '': user_id = self.request.user.id
     activities = Activity.objects.filter(
         user_id=user_id,
         target_object_type_id=ContentType.objects.get(
