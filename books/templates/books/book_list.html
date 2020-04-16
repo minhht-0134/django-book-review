@@ -1,13 +1,24 @@
 {% extends "books/base.html" %}
 {% load static %}
+{% load bootstrap4 %}
 
 {% block page_content %}
   <link rel="stylesheet" type="text/css" href="{% static '/styles/books/style.css' %}">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+    $(function() {$('#id_pub_date__gt, #id_pub_date__lt').datepicker({ dateFormat: 'yy-mm-dd' })});
+  </script>
   <br>
-  <h2>Book list</h2>
-  {% if object_list %}
+  <form action="{% url 'book_list' %}" method="get" class="mb-0">
+    <div class="row book_list_search_form">
+      {% bootstrap_form form %}
+      <button class="btn btn-primary">Search</button>
+    </div>
+  </form>
+  {% if page_obj %}
     <div class="row book_list">
-      {% for book in object_list %}
+      {% for book in page_obj %}
         <div onclick=window.location.href='{% url "book_detail" book.id %}'>
           <div class="col-sm container book clickable" >
             <div>
@@ -18,11 +29,13 @@
             <div class="book_extra_info">
               {{ book.pub_date }}
               <br>
-              {{ book.number_of_pages }} trang
+              {{ book.number_of_pages }}pages
             </div>
           </div>
         </div>
       {% endfor %}
     </div>
+    <br>
+    {% include 'books/pagination.html' %}
   {% endif %}
 {% endblock %}

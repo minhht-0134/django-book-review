@@ -1,0 +1,23 @@
+<div class="pagination">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+      <span class="clickable btn btn-primary" onclick="nexPage(1)">&laquo; first</span>
+      <span class="clickable btn btn-primary" onclick="nexPage({{ page_obj.previous_page_number }})">previous</span>
+    {% endif %}
+
+    <span class="current">
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+
+    {% if page_obj.has_next %}
+      <span class="clickable btn btn-primary" onclick="nexPage({{ page_obj.next_page_number }})">next</span>
+      <span class="clickable btn btn-primary" onclick="nexPage({{ page_obj.paginator.num_pages }})">last &raquo;</span>
+    {% endif %}
+  </span>
+</div>
+<script type="text/javascript">
+  function nexPage(page) {
+    window.location.href = '?' + (window.location.href.split('?')[1] || '').split('&')
+      .filter(function(i) {return !(i.startsWith('page'))}).join('&') + '&page=' + page
+  }
+</script>

@@ -169,3 +169,30 @@
 .user_activities .activity_list {
   height: 80vh;
 }
+
+.book_list_search_form .form-check {
+  width: 80px;
+  padding-top: 7px;
+}
+
+.book_list_search_form .form-group {
+  padding-left: 10px;
+}
+
+.book_list_search_form button {
+  margin-left: 10px;
+  width: 100px;
+  margin-bottom: 16px;
+}
+
+.book_list_search_form label {
+  padding-left: 5px;
+}
+
+.book_list_search_form label[for=id_title__contains], label[for=id_pub_date__gt], label[for=id_pub_date__lt] {
+  display: none;
+}
+
+.book_list_search_form #id_title__contains, #id_pub_date__gt, #id_pub_date__lt {
+  width: 150px;
+}

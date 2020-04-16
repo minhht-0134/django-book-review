@@ -50,7 +50,12 @@
     </div>
     <hr>
     <div class="row">
-      <span class="number">{{ reading_count }}</span>
+      <span
+        class="number clickable"
+        onclick=window.location.href='{% url "book_list" %}?user_id={{ user.id }}&reading=on'
+      >
+        {{ reading_count }}
+      </span>
       <span>reading</span>
       <div class="row extra_list">
         {% for book in reading_books %}
@@ -64,7 +69,12 @@
       </div>
     </div>
     <div class="row">
-      <span class="number">{{ readed_count }}</span>
+      <span
+        class="number clickable"
+        onclick=window.location.href='{% url "book_list" %}?user_id={{ user.id }}&readed=on'
+      >
+        {{ readed_count }}
+      </span>
       <span>readed</span>
       <div class="row extra_list">
         {% for book in readed_books %}
@@ -79,7 +89,12 @@
     </div>
     <hr>
     <div class="row">
-      <span class="number">{{ favorite_count }}</span>
+      <span
+        class="number clickable"
+        onclick=window.location.href='{% url "book_list" %}?user_id={{ user.id }}&favorite=on'
+      >
+        {{ favorite_count }}
+      </span>
       <span>favorites</span>
       <div class="row extra_list">
         {% for book in favorite_books %}

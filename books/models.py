@@ -83,11 +83,11 @@ class Activity(ActivitiesMixin, TimeStampMixin):
     (READED, 'Readed'),
   ]
 
-  BUY_PEDDING = 0
+  BUY_PENDING = 0
   BUY_APPROVE = 1
   BUY_REJECT = 2
   BUY_STATUSES = [
-    (BUY_PEDDING, 'Pending'),
+    (BUY_PENDING, 'Pending'),
     (BUY_APPROVE, 'Approve'),
     (BUY_REJECT, 'Reject'),
   ]

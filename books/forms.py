@@ -18,6 +18,28 @@ class SignupForm(forms.Form):
     widget=forms.PasswordInput()
   )
 
+class BookListSearchForm(forms.Form):
+  user_id = forms.IntegerField(widget=forms.HiddenInput())
+  reading = forms.BooleanField(required=False)
+  readed = forms.BooleanField(required=False)
+  favorite = forms.BooleanField(required=False)
+  pending = forms.BooleanField(required=False)
+  approve = forms.BooleanField(required=False)
+  reject = forms.BooleanField(required=False)
+
+  title__contains = forms.CharField(label='title', required=False)
+
+  pub_date__gt = forms.DateField(
+    label='pub_date_start',
+    required=False,
+    widget=forms.DateTimeInput
+  )
+  pub_date__lt = forms.DateField(
+    label='pub_date_end',
+    required=False,
+    widget=forms.DateTimeInput
+  )
+
 class ActivityAdminForm(forms.ModelForm):
   status = forms.ChoiceField(
     widget=forms.Select(), choices=(Activity.BUY_STATUSES))
