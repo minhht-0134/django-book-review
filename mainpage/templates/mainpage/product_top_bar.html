@@ -1,7 +1,13 @@
 {% load static %}
 <div class="product_top_bar d-flex justify-content-between align-items-center">
     <div class="single_product_menu">
-        <p><span>{{ total_book }} </span> Prodict Found</p>
+        <p><span>
+            {% if search_count %}
+                {{ search_count }}
+            {% else %}
+                {{ total_book }}
+            {% endif %}
+        </span> Prodict Found</p>
     </div>
     <div class="single_product_menu d-flex">
         <h5>short by : </h5>
@@ -20,11 +26,11 @@
     </div>
     <div class="single_product_menu d-flex">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="search"
+            <input id="inner_search" type="text" class="form-control" placeholder="search"
                 aria-describedby="inputGroupPrepend">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroupPrepend">
-                    <a href="?category=all&page=1&search=qjwhge"><i class="ti-search"></i></a>
+                    <a href="?category=all&page=1&search="><i class="ti-search"></i></a>
                 </span>
             </div>
         </div>

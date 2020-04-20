@@ -13,7 +13,7 @@
                     <div class="single_product_item">
                         <img src="{{ foo.image_url}}" alt="">
                         <div class="itemBestBooks">
-                            <h4><a href="#">{{ foo.title}}</a></h4>
+                            <h4><a href="{% url 'book-detail' foo.id %}">{{ foo.title}}</a></h4>
                             <p>- {{ foo.author }}</p>
                         </div>
                     </div>

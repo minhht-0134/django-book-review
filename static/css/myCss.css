@@ -30,7 +30,9 @@
 .padding_0 {
     padding: 0;
 }
-
+.paddingBottom_0 {
+    padding-bottom: 0;
+}
 .bgImg {
     /*background-color: #9dafbb;*/
     background-color: hsla(222, 77%, 71%, 0.3);
@@ -58,4 +60,65 @@ a.disabled {
 
 .active_cate {
     color: #ff3368 !important;
+}
+
+#inner_search {
+    text-transform: none !important;
+}
+
+.floatRight {
+    float: right;
+}
+
+.colorFacebook {
+    color: #4267b2;
+}
+
+.colorLike {
+    color: #4267b2;
+}
+.colorFavorite {
+    color: #ff3368;
+}
+.colorStar {
+    color: #fbd600;
+}
+
+
+
+.rate:not(:checked) > input {
+    position: fixed;
+    /*top:-9999px;*/
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:40px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+.font_sans {
+    font-family: sans-serif;
+    color: #797979;
+    margin-left: 20px;
 }

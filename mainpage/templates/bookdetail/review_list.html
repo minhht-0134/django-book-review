@@ -1,0 +1,46 @@
+{% load static %}
+<div class="review_list">
+    {% for rate in get_rates %}
+        <div class="review_item">
+            <div class="media">
+                <div class="d-flex">
+                    <img src="{% static 'home_page/img/product/single-product/review-1.png' %}"
+                         alt=""/>
+                </div>
+                <div class="media-body">
+                    <h4>{{ rate.user }}</h4>
+                    <a class="reply_btn" href="#">Reply</a>
+                    {% for foo in rate.make_range %}
+                        <i class="fa fa-star"></i>
+                    {% endfor %}
+                    <span class="font_sans">{{ rate.get_create }}
+                        {% if rate.edited %}
+                            (edited)
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+            <p>
+                {{ rate.review }}
+            </p>
+        </div>
+        <div class="review_item reply">
+    <div class="media">
+        <div class="d-flex">
+            <img src="{% static 'home_page/img/product/single-product/review-2.png' %}"
+                 alt=""/>
+        </div>
+        <div class="media-body">
+            <h4>Blake Ruiz</h4>
+            <h5 class="font_sans">12th Feb, 2017 at 05:56 pm</h5>
+        </div>
+    </div>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna
+        aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+        ullamco laboris nisi ut aliquip ex ea commodo
+    </p>
+</div>
+    {% endfor %}
+</div>

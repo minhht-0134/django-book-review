@@ -7,7 +7,7 @@
                 <div class="single_product_text">
                     <h4>{{ book.title }}</h4>
                     <h3>- {{ book.author }}</h3>
-                    <a href="#" class="add_cart textCenter">review</a>
+                    <a href="{% url 'book-detail' book.id %}" class="add_cart textCenter">review</a>
                 </div>
             </div>
         </div>

@@ -1,0 +1,34 @@
+{% extends 'layouts/index.html' %}
+{% load static %}
+{% block title %}
+    {{ book.title }} | {{ block.super }}
+{% endblock %}
+{% block content %}
+    <div class="product_image_area section_padding paddingBottom_0">
+        <div class="container">
+            <div class="row s_product_inner justify-content-between">
+                <div class="col-lg-7 col-xl-7">
+                    {% include 'bookdetail/product_slider_img.html' %}
+                </div>
+                <div class="col-lg-5 col-xl-4">
+                    {% include 'bookdetail/s_product_text.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="product_description_area">
+        <div class="container">
+            {% include 'bookdetail/tablist.html' %}
+            <div class="tab-content" id="myTabContent">
+                {% include 'bookdetail/tab_description.html' %}
+                {% include 'bookdetail/tab_specification.html' %}
+                {% include 'bookdetail/tab_comments.html' %}
+                {% include 'bookdetail/tab_review.html' %}
+            </div>
+        </div>
+    </section>
+    <section class="product_list best_seller">
+        {% include 'mainpage/best_books.html' %}
+    </section>
+
+{% endblock %}
