@@ -6,10 +6,12 @@ from quotes.models import Quote
 from books.models import *
 from books.form import *
 
+
 class Data():
     def getbook(self):
         print("okkkkkkkkkkkkk")
-        
+
+
 class MainPage(LoginRequiredMixin, ListView):
     def check_logged(self, request):
         if request.user.is_authenticated:
@@ -27,7 +29,7 @@ class MainPage(LoginRequiredMixin, ListView):
     
     def get_books(self, request, objects):
         page = request.GET.get('page', 1)
-        paginator = Paginator(objects, 9)
+        paginator = Paginator(objects, 6)
         total_page = f"{page}/{paginator.num_pages}"
         try:
             objects = paginator.page(page)
@@ -51,6 +53,7 @@ class MainPage(LoginRequiredMixin, ListView):
         category_id = request.GET.get('category')
         search_key = request.GET.get('search')
         search_count = None
+        best_book = Book.objects.all().order_by("-score_rate")[:10]
         if search_key:
             books = Book.objects.filter(title__icontains=search_key)
             search_count = books.count()
@@ -62,7 +65,7 @@ class MainPage(LoginRequiredMixin, ListView):
         else:
             page, books, total_book = self.filter_category(category_id, request)
             category_id = int(category_id)
-
+        
         obj = {
             'current_user': current_user,
             'logged': logged,
@@ -73,7 +76,8 @@ class MainPage(LoginRequiredMixin, ListView):
             'page': page,
             'q_category': category_id,
             'search_count': search_count,
-            'search_key': search_key
+            'search_key': search_key,
+            'best_book': best_book
         }
         return render(request, template_name, obj)
 
@@ -100,15 +104,18 @@ class BookDetailView(LoginRequiredMixin, ListView):
         book = self.get_book(kwargs.get('pk'))
         books = Book.objects.all()
         get_rates = self.get_rate(book)
-        obj={
+        best_book = Book.objects.all().order_by("-score_rate")[:10]
+        obj = {
             'current_user': current_user,
             'logged': logged,
             'book': book,
             'books': books,
-            'get_rates': get_rates
+            'get_rates': get_rates,
+            'best_book': best_book
         }
         return render(request, template_name, obj)
-    
+
+
 class RateBookView(LoginRequiredMixin, ListView):
     def post(self, request, *args, **kwargs):
         pk = kwargs.get('pk')
@@ -140,9 +147,9 @@ class RateBookView(LoginRequiredMixin, ListView):
                 old_score = book.score_rate
                 old_total = book.total_rate
                 book.score_rate = old_score + int(rate_data)
-                book.total_rate = old_total +1
+                book.total_rate = old_total + 1
                 book.save()
-
+        
         except:
             return redirect('book-detail', pk=pk)
         return redirect('book-detail', pk=pk)

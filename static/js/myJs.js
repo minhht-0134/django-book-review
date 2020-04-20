@@ -11,4 +11,8 @@
         const value = $("#"+getAttr).val()
         $('#selectedRate').val(value)
     });
+
+    $('.btn_delete_comment').click(function () {
+        return confirm('Are you sure you want to delete this?');
+    })
 }(jQuery));

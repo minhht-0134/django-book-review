@@ -1,3 +1,5 @@
+@import "rate.css";
+
 .color-red {
     color: red;
 }
@@ -75,7 +77,7 @@ a.disabled {
 }
 
 .colorLike {
-    color: #4267b2;
+    color: #4267b2 !important;
 }
 .colorFavorite {
     color: #ff3368;
@@ -83,42 +85,47 @@ a.disabled {
 .colorStar {
     color: #fbd600;
 }
-
-
-
-.rate:not(:checked) > input {
-    position: fixed;
-    /*top:-9999px;*/
-}
-.rate:not(:checked) > label {
-    float:right;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:40px;
-    color:#ccc;
-}
-.rate:not(:checked) > label:before {
-    content: '★ ';
-}
-.rate > input:checked ~ label {
-    color: #ffc700;
-}
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-    color: #deb217;
-}
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-    color: #c59b08;
-}
-
 .font_sans {
     font-family: sans-serif;
     color: #797979;
     margin-left: 20px;
+}
+.rateHeight {
+    height: 80px !important;
+}
+.marginLeft_0 {
+    margin-left: 0px !important;
+}
+
+.quotesText {
+    padding: 5px 20px;
+    border-left: 2px solid #ff3368;
+}
+.iconEdit {
+    color: #4267b2 !important;
+    font-size: 16px;
+}
+.iconDel {
+    color: #f53838 !important;
+    font-size: 16px;
+}
+
+.listComment {
+    max-height: 500px;
+    overflow: scroll;
+    overflow-x: hidden !important;
+}
+
+.review_list {
+    max-height: 700px;
+    overflow: scroll;
+    overflow-x: hidden !important;
+}
+
+.maxHeight392 {
+    max-height: 392px !important;
+    max-width: 262px !important;
+}
+.reviewImg{
+    max-height: 100% !important;
 }

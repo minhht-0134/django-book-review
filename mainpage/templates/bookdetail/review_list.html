@@ -9,7 +9,8 @@
                 </div>
                 <div class="media-body">
                     <h4>{{ rate.user }}</h4>
-                    <a class="reply_btn" href="#">Reply</a>
+                    <a data-toggle="collapse" data-target="#comment{{ rate.id }}" class="reply_btn" href="#">Reply</a>
+
                     {% for foo in rate.make_range %}
                         <i class="fa fa-star"></i>
                     {% endfor %}
@@ -18,29 +19,65 @@
                             (edited)
                         {% endif %}
                     </span>
+                    <span class="font_sans">
+                        <i class="far fa-comments colorLike"></i> {{ rate.count_comment }} Comments
+                    </span>
                 </div>
             </div>
             <p>
                 {{ rate.review }}
             </p>
+            <div id="comment{{ rate.id }}" class="collapse">
+                <hr>
+                <form action="{% url 'comment-rate' book.id rate.id %}" method="post">
+                    {% csrf_token %}
+                    <textarea class="form-control rateHeight" placeholder="Write comment..." rows="5" id="comment" name="content" required></textarea>
+                    <button class="genric-btn primary small" type="submit">Comment</button>
+                </form>
+            </div>
+
+            {% if rate.list_comment %}
+                <a data-toggle="collapse" data-target="#showcomment{{ rate.id }}" class="reply_btn" href="#">Show comments</a>
+            {% endif %}
         </div>
-        <div class="review_item reply">
-    <div class="media">
-        <div class="d-flex">
-            <img src="{% static 'home_page/img/product/single-product/review-2.png' %}"
-                 alt=""/>
+        <div id="showcomment{{ rate.id }}" class="collapse">
+            <div class="listComment">
+                {% for comment in rate.list_comment %}
+                    <div class="review_item reply">
+                        <div class="media">
+                            <div class="d-flex">
+                                <img src="{% static 'home_page/img/product/single-product/review-2.png' %}"
+                                     alt=""/>
+                            </div>
+                            <div class="media-body">
+                                <h4>{{ comment.user }}</h4>
+                                <span class="font_sans marginLeft_0">{{ comment.get_create }}</span>
+                                {% if current_user == comment.user %}
+                                    <span class="font_sans">
+                                        <a href="#"  data-toggle="collapse" data-target="#editcomment{{ comment.id }}">
+                                            <i title="Edit" class="fa fa-edit iconEdit"></i>
+                                        </a>
+                                        <a href="{% url 'edit-or-delete-comment' book.id comment.id %}" class="btn_delete_comment">
+                                            <i title="Delete" class="fa fa-trash iconDel"></i>
+                                        </a>
+                                    </span>
+
+                                {% endif %}
+                            </div>
+                        </div>
+                        <p>{{ comment.content }}</p>
+                        <div id="editcomment{{ comment.id }}" class="collapse">
+                            <form action="{% url 'edit-or-delete-comment' book.id comment.id %}" method="post">
+                                {% csrf_token %}
+                                <textarea class="form-control rateHeight"
+                                          rows="5" id="comment" name="content" required>{{ comment.content }}</textarea>
+                                <button class="genric-btn primary small" type="submit">Edit comment</button>
+                            </form>
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-        <div class="media-body">
-            <h4>Blake Ruiz</h4>
-            <h5 class="font_sans">12th Feb, 2017 at 05:56 pm</h5>
-        </div>
-    </div>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore magna
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-        ullamco laboris nisi ut aliquip ex ea commodo
-    </p>
-</div>
     {% endfor %}
 </div>

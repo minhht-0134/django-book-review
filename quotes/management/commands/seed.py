@@ -172,77 +172,97 @@ def create_books():
     print('Creating books...')
     data_books = [
         {
-            'title': "Khi Người Ta Tư Duy",
-            'image_url': 'https://sachvui.com/cover2/2019/khi-nguoi-ta-tu-duy.jpg',
-            'author': 'James Allen',
+            'title': "Các Kiểu Kiến Trúc Trên Thế Giới",
+            'image_url': 'https://sachvui.com/cover/2018/cac-kieu-kien-truc-tren-the-gioi.jpg',
+            'author': 'Nguyễn Tứ',
+            'book_url': 'https://sachvui.com/sachvui-686868666888/ebooks/2018/pdf/Sachvui.Com-cac-kieu-kien-truc-tren-the-gioi-nguyen-tu.pdf',
             'pages': 123
         },
         {
-            'title': 'Làm Ít Được Nhiều',
-            'image_url': 'https://sachvui.com/cover2/2019/lam-it-duoc-nhieu.jpg',
-            'author': 'Chin Ning Chu',
+            'title': 'Con Trai Kẻ Khủng Bố',
+            'image_url': 'https://sachvui.com/cover/2019/con-trai-ke-khung-bo.jpg',
+            'author': 'Zak Ebrahim',
+            'book_url': 'https://sachvui.com/sachvui-686868666888/ebooks/2019/pdf/Sachvui.Com-con-trai-ke-khung-bo-zak-ebrahim.pdf',
             'pages': 76
         },
         {
-            'title': "Khi Người Ta Tư Duy",
-            'image_url': 'https://sachvui.com/cover2/2019/khi-nguoi-ta-tu-duy.jpg',
-            'author': 'James Allen',
-            'pages': 123
-        },
-        {
-            'title': 'Làm Ít Được Nhiều',
-            'image_url': 'https://sachvui.com/cover2/2019/lam-it-duoc-nhieu.jpg',
-            'author': 'Chin Ning Chu',
+            'title': 'Từ Tơ Lụa Đến Silicon',
+            'image_url': 'https://sachvui.com/cover/2019/tu-to-lua-den-silicon.jpg',
+            'author': 'Jeffrey E. Garten',
+            'book_url': 'https://sachvui.com/sachvui-686868666888/ebooks/2019/pdf/Sachvui.Com-tu-to-lua-den-silicon-jeffrey-e-garten.pdf',
             'pages': 76
         },
         {
-            'title': "Khi Người Ta Tư Duy",
-            'image_url': 'https://sachvui.com/cover2/2019/khi-nguoi-ta-tu-duy.jpg',
-            'author': 'James Allen',
-            'pages': 123
-        },
-        {
-            'title': 'Làm Ít Được Nhiều',
-            'image_url': 'https://sachvui.com/cover2/2019/lam-it-duoc-nhieu.jpg',
-            'author': 'Chin Ning Chu',
+            'title': 'Thơ Ngụ Ngôn La Fontaine',
+            'image_url': 'https://sachvui.com/cover/2018/tho-ngu-ngon-la-fontaine.jpg',
+            'author': 'Jean de la Fontaine',
+            'book_url': 'https://sachvui.com/sachvui-686868666888/ebooks/2018/pdf/Sachvui.Com-tho-ngu-ngon-la-fontaine-jean-de-la-fontaine.pdf',
             'pages': 76
         },
+    
         {
-            'title': "Khi Người Ta Tư Duy",
-            'image_url': 'https://sachvui.com/cover2/2019/khi-nguoi-ta-tu-duy.jpg',
-            'author': 'James Allen',
-            'pages': 123
-        },
-        {
-            'title': 'Làm Ít Được Nhiều',
-            'image_url': 'https://sachvui.com/cover2/2019/lam-it-duoc-nhieu.jpg',
-            'author': 'Chin Ning Chu',
+            'title': 'Lịch Sử Giao Thương: Thương Mại Định Hình Thế Giới Như Thế Nào?',
+            'image_url': 'https://sachvui.com/cover/2019/lich-su-giao-thuong-thuong-mai-dinh-hinh-the-gioi-nhu-the-nao.jpg',
+            'author': 'William J. Bernstein',
+            'book_url': 'https://sachvui.com/sachvui-686868666888/ebooks/2019/pdf/Sachvui.Com-lich-su-giao-thuong-thuong-mai-dinh-hinh-the-gioi-nhu-the-nao-william-j-bernstein.pdf',
             'pages': 76
         },
+    
         {
-            'title': "Khi Người Ta Tư Duy",
-            'image_url': 'https://sachvui.com/cover2/2019/khi-nguoi-ta-tu-duy.jpg',
-            'author': 'James Allen',
-            'pages': 123
+            'title': 'Hành Trình Của Linh Hồn',
+            'image_url': 'https://sachvui.com/cover/2019/hanh-trinh-cua-linh-hon.jpg',
+            'author': 'Michael Duff Newton',
+            'book_url': 'https://sachvui.com/download/pdf/7354',
+            'pages': 76
         },
+    
         {
-            'title': 'Làm Ít Được Nhiều',
-            'image_url': 'https://sachvui.com/cover2/2019/lam-it-duoc-nhieu.jpg',
-            'author': 'Chin Ning Chu',
-            'pages': 123
+            'title': 'Đức Phật Và Phật Pháp',
+            'image_url': 'https://sachvui.com/cover/2018/duc-phat-va-phat-phap.jpg',
+            'author': 'Maha Thera',
+            'book_url': 'https://sachvui.com/download/pdf/6965',
+            'pages': 76
         },
+    
         {
-            'title': "Khi Người Ta Tư Duy",
-            'image_url': 'https://sachvui.com/cover2/2019/khi-nguoi-ta-tu-duy.jpg',
-            'author': 'James Allen',
-            'pages': 123
+            'title': 'Sinh Ra Để Chạy',
+            'image_url': 'https://sachvui.com/cover/2019/sinh-ra-de-chay.jpg',
+            'author': 'Christopher McDougall',
+            'book_url': 'https://sachvui.com/download/pdf/7360',
+            'pages': 76
         },
+    
         {
-            'title': 'Làm Ít Được Nhiều',
-            'image_url': 'https://sachvui.com/cover2/2019/lam-it-duoc-nhieu.jpg',
-            'author': 'Chin Ning Chu',
-            'pages': 123
-        }
+            'title': 'Tự Học Tiếng Anh Hiệu Quả',
+            'image_url': 'https://sachvui.com/cover/2019/tu-hoc-tieng-anh-hieu-qua.jpg',
+            'author': 'Nguyễn Thị Hà Bắc',
+            'book_url': 'https://sachvui.com/download/pdf/7333',
+            'pages': 76
+        },
+    
+        {
+            'title': 'Lối Sống Tối Giản Của Người Nhật',
+            'image_url': 'https://sachvui.com/cover/2018/loi-song-toi-gian-cua-nguoi-nhat.jpg',
+            'author': 'Sasaki Fumio',
+            'book_url': 'https://sachvui.com/download/pdf/6790',
+            'pages': 76
+        },
+    
+        {
+            'title': 'Dám Bị Ghét',
+            'image_url': 'https://sachvui.com/cover/2018/dam-bi-ghet.jpg',
+            'author': 'Koga Fumitake - Kishimi Ichiro',
+            'book_url': 'https://sachvui.com/download/pdf/6740',
+            'pages': 76
+        },
+    
+        {
+            'title': 'Công Nghệ Blockchain',
+            'image_url': 'https://sachvui.com/cover/2018/cong-nghe-blockchain.jpg',
+            'author': 'Nhiều tác giả',
+            'book_url': 'https://sachvui.com/download/pdf/6715',
+            'pages': 76
+        },
     ]
     book = None
     ids = []
@@ -255,6 +275,7 @@ def create_books():
             author=data.get('author'),
             pages=data.get('pages'),
             image_url=data.get('image_url'),
+            book_url=data.get('book_url'),
             category=random.choice(ids),
             # category=ids[0],
         )

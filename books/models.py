@@ -20,6 +20,7 @@ class Book(models.Model):
     category = models.ForeignKey(Category, related_name='category_books', on_delete=models.CASCADE)
     image_src = models.ImageField(upload_to='static/uploads/images', null=True, blank=True, default="static/uploads/default.png")
     image_url = models.CharField(max_length=255, null=True, blank=False)
+    book_url = models.CharField(max_length=255, null=True, blank=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     
@@ -48,4 +49,38 @@ class Rate(models.Model):
         month = self.updated.month
         year = self.updated.year
         create_at = f"{day}/{month}/{year}"
+        return create_at
+    
+    def list_comment(self):
+        comments = []
+        try:
+            comments = self.rate_comment.all().order_by('-id')
+        except:
+            print('err')
+            return comments
+        return comments
+    
+    def count_comment(self):
+        count = 0
+        try:
+            count = self.rate_comment.all().count()
+        except:
+            print('err')
+            return count
+        return count
+    
+class Comment(models.Model):
+    user = models.ForeignKey(User, related_name='user_comment', on_delete=models.CASCADE)
+    rate = models.ForeignKey(Rate, related_name='rate_comment', on_delete=models.CASCADE)
+    content = models.CharField(max_length=255, null=False, blank=False)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    def get_create(self):
+        day = self.updated.day
+        month = self.updated.month
+        year = self.updated.year
+        minute = self.updated.minute
+        hour = self.updated.hour
+        create_at = f"on {day}/{month}/{year} at {hour}:{minute}"
         return create_at

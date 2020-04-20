@@ -17,7 +17,9 @@
         Two fruitful let days signs sea together all land fly subdue
     </p>
     <div class="card_area d-flex justify-content-between align-items-center">
-        <a href="#" class="btn_3">read this book</a>
+        {% if book.book_url %}
+            <a href="{{ book.book_url }}" target="_blank" class="btn_3">read this book</a>
+        {% endif %}
         <a href="#" class="like_us" title="Share your facebook"> <i
                 class="ti-facebook colorFacebook"></i> </a>
 
