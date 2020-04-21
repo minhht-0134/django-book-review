@@ -20,6 +20,8 @@ class SignupForm(forms.Form):
 
 class BookListSearchForm(forms.Form):
   user_id = forms.IntegerField(widget=forms.HiddenInput())
+  is_search = forms.BooleanField(widget=forms.HiddenInput(), initial=True)
+
   reading = forms.BooleanField(required=False)
   readed = forms.BooleanField(required=False)
   favorite = forms.BooleanField(required=False)

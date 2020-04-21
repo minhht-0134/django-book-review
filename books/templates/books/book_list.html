@@ -3,13 +3,56 @@
 {% load bootstrap4 %}
 
 {% block page_content %}
-  <link rel="stylesheet" type="text/css" href="{% static '/styles/books/style.css' %}">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
     $(function() {$('#id_pub_date__gt, #id_pub_date__lt').datepicker({ dateFormat: 'yy-mm-dd' })});
   </script>
   <br>
+  {% if is_search is None and page is None %}
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      </ol>
+      <div class="carousel-inner p-3 mb-4 bg-light">
+        <div class="carousel-item active">
+          <div style="height: 30vh"></div>
+          <div class="container">
+            <div class="carousel-caption text-center text-dark">
+              <h1 class="display-4 font-weight-normal">{{ newest_book_public }}</h1>
+              <p class="lead font-weight-normal">Newest book public</p>
+              <a class="btn btn-outline-secondary" href='{% url "book_detail" newest_book_public.id %}'>Read it</a>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div style="height: 30vh"></div>
+          <div class="container">
+            <div class="carousel-caption text-dark">
+              <h1 class="display-4 font-weight-normal">{{ newest_review.target_object }}</h1>
+              <p>
+                <span>Lastest review from </span>
+                <span><strong>{{ newest_review.user }}</strong></span>
+                <span class="font-italic">"{{ newest_review.content }}"</span>
+              </p>
+              <a class="btn btn-outline-secondary" href='{% url "book_detail" newest_review.target_object_id %}'>Read it</a>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div style="height: 30vh"></div>
+          <div class="container">
+            <div class="carousel-caption text-dark">
+              <h1 class="display-4 font-weight-normal">Django training course.</h1>
+              <p>Make awesome things that matter.</p>
+              <a class="btn btn-outline-secondary">Learn it</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
   <form action="{% url 'book_list' %}" method="get" class="mb-0">
     <div class="row book_list_search_form">
       {% bootstrap_form form %}

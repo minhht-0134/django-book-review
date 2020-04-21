@@ -1,5 +1,11 @@
 <div class="col-md user_info">
-  <h1 class="font-weight-bold">{{ user }}</h1>
+  <div class="d-flex align-items-center p-3 text-white-50 bg-primary rounded">
+    {% include 'books/user_icon.html' with size=80 %}
+    <div class="lh-100">
+      <h5 class="mb-0 text-white lh-100">{{ user }}</h5>
+      <small>{{ user.email }}</small>
+    </div>
+  </div>
   <br>
   {% if user.id != request.user.id %}
     {% if follow_act is None %}
@@ -19,107 +25,167 @@
       </button>
     {% endif %}
   {% endif %}
+
   <div class="statistic">
-    <div class="row">
-      <span class="number">{{ following_count }}</span>
-      <span>following</span>
-      <div class="row extra_list">
-        {% for user in following_users %}
-          <span
-            class="username clickable"
-            onclick=window.location.href='{% url "user_detail" user.id %}'
-          >
-            {{ user }}
-          </span>
-        {% endfor %}
+    <div class="bg-warning text-white mb-4 rounded">
+      <div class="card-body">Fiends</div>
+      <div class="card-footer d-flex align-items-center justify-content-between">
+        <div class="row pl-3">
+          <span class="small text-white pr-2">Following</span>
+          <span class="small text-white pl-2 pr-2 number">{{ following_count }}</span>
+        </div>
+        <div class="small text-white clickable" data-toggle="collapse" href="#collapseFollowing">
+          {% include 'books/arrange_right.html' with size=20 %}
+        </div>
       </div>
+      {% if following_users %}
+        <div class="collapse card-footer" id="collapseFollowing">
+          {% for user in following_users %}
+            <span
+              class="clickable"
+              onclick=window.location.href='{% url "user_detail" user.id %}'
+            >
+              {% include 'books/user_icon.html' with size=25 %}
+              <span class="small">{{ user }}</span>
+            </span>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="card-footer d-flex align-items-center justify-content-between">
+        <div class="row pl-3">
+          <span class="small text-white pr-2">Follower</span>
+          <span class="small text-white pl-2 pr-2 number">{{ followed_count }}</span>
+        </div>
+        <div class="small text-white clickable" data-toggle="collapse" href="#collapseFollowed">
+          {% include 'books/arrange_right.html' with size=20 %}
+        </div>
+      </div>
+      {% if followed_users %}
+        <div class="collapse card-footer" id="collapseFollowed">
+          {% for user in followed_users %}
+            <span
+              class="clickable"
+              onclick=window.location.href='{% url "user_detail" user.id %}'
+            >
+              {% include 'books/user_icon.html' with size=25 %}
+              <span class="small">{{ user }}</span>
+            </span>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
-    <div class="row">
-      <span class="number">{{ followed_count }}</span>
-      <span>follower</span>
-      <div class="row extra_list">
-        {% for user in followed_users %}
+
+    <div class="bg-warning text-white mb-4 rounded">
+      <div class="card-body">Books</div>
+      <div class="card-footer d-flex align-items-center justify-content-between">
+        <div class="row pl-3">
           <span
-            class="username clickable"
-            onclick=window.location.href='{% url "user_detail" user.id %}'
+            class="small text-white pr-2 clickable"
+            onclick=window.location.href='{% url "book_list" %}?user_id={{ user.id }}&reading=on'
           >
-            {{ user }}
+            Reading
           </span>
-        {% endfor %}
+          <span class="small text-white pl-2 pr-2 number">{{ reading_count }}</span>
+        </div>
+        <div class="small text-white clickable" data-toggle="collapse" href="#collapseReading">
+          {% include 'books/arrange_right.html' with size=20 %}
+        </div>
       </div>
-    </div>
-    <hr>
-    <div class="row">
-      <span
-        class="number clickable"
-        onclick=window.location.href='{% url "book_list" %}?user_id={{ user.id }}&reading=on'
-      >
-        {{ reading_count }}
-      </span>
-      <span>reading</span>
-      <div class="row extra_list">
-        {% for book in reading_books %}
+      {% if reading_books %}
+        <div class="collapse card-footer" id="collapseReading">
+          {% for book in reading_books %}
+            <div
+              class="clickable"
+              onclick=window.location.href='{% url "book_detail" book.id %}'
+            >
+              {% include 'books/book_icon.html' with size=15 %}
+              <span class="small">{{ book }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="card-footer d-flex align-items-center justify-content-between">
+        <div class="row pl-3">
           <span
-            class="username clickable"
-            onclick=window.location.href='{% url "book_detail" book.id %}'
+            class="small text-white pr-2 clickable"
+            onclick=window.location.href='{% url "book_list" %}?user_id={{ user.id }}&readed=on'
           >
-            {{ book }}
+            Readed
           </span>
-        {% endfor %}
+          <span class="small text-white pl-2 pr-2 number">{{ readed_count }}</span>
+        </div>
+        <div class="small text-white clickable" data-toggle="collapse" href="#collapseReaded">
+          {% include 'books/arrange_right.html' with size=20 %}
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <span
-        class="number clickable"
-        onclick=window.location.href='{% url "book_list" %}?user_id={{ user.id }}&readed=on'
-      >
-        {{ readed_count }}
-      </span>
-      <span>readed</span>
-      <div class="row extra_list">
-        {% for book in readed_books %}
+      {% if readed_books %}
+        <div class="collapse card-footer" id="collapseReaded">
+          {% for book in readed_books %}
+            <div
+              class="clickable"
+              onclick=window.location.href='{% url "book_detail" book.id %}'
+            >
+              {% include 'books/book_icon.html' with size=15 %}
+              <span class="small">{{ book }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="card-footer d-flex align-items-center justify-content-between">
+        <div class="row pl-3">
           <span
-            class="username clickable"
-            onclick=window.location.href='{% url "book_detail" book.id %}'
+            class="small text-white pr-2 clickable"
+            onclick=window.location.href='{% url "book_list" %}?user_id={{ user.id }}&favorite=on'
           >
-            {{ book }}
+            Favorite
           </span>
-        {% endfor %}
+          <span class="small text-white pl-2 pr-2 number">{{ favorite_count }}</span>
+        </div>
+        <div class="small text-white clickable" data-toggle="collapse" href="#collapseFavotire">
+          {% include 'books/arrange_right.html' with size=20 %}
+        </div>
       </div>
-    </div>
-    <hr>
-    <div class="row">
-      <span
-        class="number clickable"
-        onclick=window.location.href='{% url "book_list" %}?user_id={{ user.id }}&favorite=on'
-      >
-        {{ favorite_count }}
-      </span>
-      <span>favorites</span>
-      <div class="row extra_list">
-        {% for book in favorite_books %}
-          <span
-            class="username clickable"
-            onclick=window.location.href='{% url "book_detail" book.id %}'
-          >
-            {{ book }}
+      {% if favorite_books %}
+        <div class="collapse card-footer" id="collapseFavotire">
+          {% for book in favorite_books %}
+            <div
+              class="clickable"
+              onclick=window.location.href='{% url "book_detail" book.id %}'
+            >
+              {% include 'books/book_icon.html' with size=15 %}
+              <span class="small">{{ book }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="card-footer d-flex align-items-center justify-content-between">
+        <div class="row pl-3">
+          <span class="small text-white pr-2">
+            Reviews
           </span>
-        {% endfor %}
+          <span class="small text-white pl-2 pr-2 number">{{ review_count }}</span>
+        </div>
+        <div class="small text-white clickable" data-toggle="collapse" href="#collapseReview">
+          {% include 'books/arrange_right.html' with size=20 %}
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <span class="number">{{ review_count }}</span>
-      <span>reviews</span>
-      <div class="row extra_list">
-        {% for review in reviews %}
-          <span
-            class="username clickable"
-            onclick=window.location.href='{% url "book_detail" review.target_object_id %}'
-          >
-            {{ review.content }}
-          </span>
-        {% endfor %}
-      </div>
+      {% if reviews %}
+        <div class="collapse card-footer" id="collapseReview">
+          {% for review in reviews %}
+            <div
+              class="clickable"
+              onclick=window.location.href='{% url "book_detail" review.target_object_id %}'
+            >
+              {% include 'books/pen_icon.html' with size=15 %}
+              <span class="small">{{ review.content }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
   </div>
 </div>

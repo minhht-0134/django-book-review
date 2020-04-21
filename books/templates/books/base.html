@@ -1,25 +1,50 @@
 {% load bootstrap4 %}
-
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
+{% load static %}
 
-<nav class="navbar navbar-light bg-dark text-secondary">
-  <div class="container">
-    <h1 class="clickable" onclick=window.location.href='{% url "book_list" %}'><a>Book store</a></h1>
-    {% if request.user.id is not None %}
-      <div class="dropdown">
-        <h4 class="clickable" id="dropdownMenuButton" data-toggle="dropdown">{{ request.user }}</h4>
-        <div class="dropdown-menu dropdown-menu-right clickable" aria-labelledby="dropdownMenuButton">
-          <div class="dropdown-item" onclick=window.location.href='{% url "user_detail" request.user.id %}'>Profile</div>
-          <div class="dropdown-item" onclick=window.location.href='{% url "logout" %}'>Logout</div>
+<link rel="stylesheet" type="text/css" href="{% static '/styles/books/style.css' %}">
+
+<div class="navbar navbar-dark bg-dark shadow-sm app-header col">
+  {% if request.user.id is not None %}
+    <div class="bg-dark collapse" id="navbarHeader" style="">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 col-md-7 py-4">
+            <h4 class="text-white">About</h4>
+            <p class="text-muted">Django project training 01.</p>
+          </div>
+          <div class="col-sm-4 offset-md-1 py-4">
+            <div class="row pl-2">
+              <span class="text-white">{% include 'books/user_icon.html' with size=30 %}</span>
+              <span></span><h4 class="text-white">{{ request.user }}</h4></span>
+            </div>
+            <ul class="list-unstyled">
+              <li><a href='{% url "user_detail" request.user.id %}' class="text-white text-muted">Profile</a></li>
+              <li><a href='{% url "logout" %}' class="text-white text-muted">Logout</a></li>
+            </ul>
+          </div>
         </div>
       </div>
+    </div>
+  {% endif %}
+  <div class="container d-flex justify-content-between">
+    <a href='{% url "book_list" %}' class="navbar-brand d-flex align-items-center">
+      <strong clickable>Bstore</strong>
+    </a>
+    {% if request.user.id is not None %}
+      <div class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </div>
     {% else %}
-      <h4 class="clickable" onclick=window.location.href='{% url "signup" %}'>Signup</h4>
+      <div class="clickable text-white" onclick=window.location.href='{% url "signup" %}'>Signup</div>
     {% endif %}
   </div>
-</nav>
-<div class="container">
-  {% block page_content %}{% endblock %}
-  {% block script %}{% endblock %}
+</div>
+
+<div class="app-body">
+  <div class="container">
+    {% block page_content %}{% endblock %}
+    {% block script %}{% endblock %}
+  </div>
 </div>

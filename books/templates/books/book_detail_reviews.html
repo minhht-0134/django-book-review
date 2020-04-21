@@ -12,7 +12,7 @@
   <div class="book_review d-none">
     <h6></h6>
     <div class="book_review_detail">
-      <h6 class="book_review_content"></h6>
+      <h6 class="book_review_content small"></h6>
       <div class="book_review_action row float-right">
         <h6 class="delele">Delele</h6>
         <h6 class="edit">Edit</h6>
@@ -36,7 +36,7 @@
   <div class="book_review_comment d-none">
     <h6></h6>
     <div class="book_review_comment_detail">
-      <h6 class="book_review_comment_content"></h6>
+      <h6 class="book_review_comment_content small"></h6>
     </div>
   </div>
   <div class="book_review_list overflow-auto">
@@ -46,7 +46,7 @@
           {{ review.user }}
         </h6>
         <div class="book_review_detail">
-          <h6 class="book_review_content">"{{ review.content }}"</h6>
+          <h6 class="book_review_content small">"{{ review.content }}"</h6>
           <div class="book_review_action row float-right">
             {% if review.user.id == request.user.id %}
               <h6 class="delele">Delele</h6>
@@ -62,7 +62,7 @@
                 {{ comment.user }}
               </h6>
               <div class="book_review_comment_detail activity-{{ comment.id }}">
-                <h6 class="book_review_comment_content">"{{ comment.content }}"</h6>
+                <h6 class="book_review_comment_content small">"{{ comment.content }}"</h6>
               </div>
             </div>
           {% endfor %}

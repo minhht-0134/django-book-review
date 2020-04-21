@@ -57,6 +57,13 @@ class BookListView(ListView):
     context = super().get_context_data(**kwargs)
 
     context['form'] = self.form_class(self.request.GET)
+    context['newest_book_public'] = Book.objects.all().order_by('-pub_date')[0]
+    context['newest_review'] = Activity.objects.filter(
+      target_object_type_id=ContentType.objects.get(
+        app_label='books', model='book').id,
+      action_type=Activity.COMMENT,)[0]
+    context['is_search'] = self.request.GET.get('is_search')
+    context['page'] = self.request.GET.get('page')
 
     return context
 

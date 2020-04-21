@@ -3,7 +3,6 @@
 
 {% block page_content %}
   {% csrf_token %}
-  <link rel="stylesheet" type="text/css" href="{% static '/styles/books/style.css' %}">
   <br>
   <div class="row" id="book_detail" data-book-id="{{ object.id }}" data-username="{{ request.user }}">
     {% include 'books/book_detail_info.html' with book=object user=request.user %}

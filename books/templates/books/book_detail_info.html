@@ -1,12 +1,14 @@
 <div class="col-md book_info">
   <h1 class="font-weight-bold">{{ book.title }}</h1>
   <br>
-  <h6>{{ book.author }}</h6>
-  <h6>{{ book.category }}</h6>
-  <h6>{{ book.pub_date }}</h6>
-  <h6>{{ book.number_of_pages }}pages</h6>
+  <div class="bg-warning text-white mb-2 p-4 rounded">
+    <h6>{{ book.author }}</h6>
+    <h6>{{ book.category }}</h6>
+    <h6>{{ book.pub_date }}</h6>
+    <h6>{{ book.number_of_pages }}pages</h6>
+  </div>
   <br>
-  <div class="book_info_action row">
+  <div class="book_info_action row pl-1">
     <div class="read">
       {% if read is None %}
         <h6 class="disactive">Unread</h6>

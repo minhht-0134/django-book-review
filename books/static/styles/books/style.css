@@ -1,3 +1,28 @@
+body {
+  background-image: url('open-book.jpg');
+  background-position-y: top;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.app-header {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+.app-header #navbarHeader {
+  position: relative;
+  width: 100%;
+}
+
+.app-body {
+  padding-top: 50px;
+  min-height: 100vh;
+  background-color: white;
+  opacity: 0.9;
+}
+
 .clickable {
   cursor: pointer;
 }
@@ -109,23 +134,10 @@
   min-width: 150px;
 }
 
-.user_info .statistic div {
-  padding: 5px 5px 5px 10px;
-}
-
-.user_info .statistic span {
-  padding-left: 10px;
-  padding-top: 8px;
-}
-
-.user_info .number {
-  padding: 10px;
-  color: peru;
-  background: wheat;
-  border-radius: 20px;
-  height: 40px;
-  min-width: 40px;
-  text-align: center;
+.user_info .statistic .number {
+  background-color: white;
+  color: #ffc107 !important;
+  border-radius: 10px;
 }
 
 .user_info .username {
@@ -147,18 +159,12 @@
   font-weight: bold;
 }
 
-.user_info .extra_list {
-  position: absolute;
-  left: 150px;
-  margin-top: -5px;
-}
-
 .user_activities .activity {
   padding: 10px;
   padding-bottom: 25px;
   margin-right: 20px;
   border-radius: 10px;
-  background: lightblue;
+  background: #e1e1e1;
   margin-bottom: 10px;
 }
 
@@ -168,6 +174,10 @@
 
 .user_activities .activity_list {
   height: 80vh;
+}
+
+.book_list {
+  padding-left: 50px;
 }
 
 .book_list_search_form .form-check {
@@ -195,4 +205,28 @@
 
 .book_list_search_form #id_title__contains, #id_pub_date__gt, #id_pub_date__lt {
   width: 150px;
+}
+
+.border-left-action-5 {
+  border-left: .25rem solid red !important;
+}
+
+.border-left-action-4 {
+  border-left: .25rem solid darkviolet !important;
+}
+
+.border-left-action-3 {
+  border-left: .25rem solid violet !important;
+}
+
+.border-left-action-2 {
+  border-left: .25rem solid blue !important;
+}
+
+.border-left-action-1 {
+  border-left: .25rem solid green !important;
+}
+
+.pagination {
+  padding-bottom: 50px;
 }
