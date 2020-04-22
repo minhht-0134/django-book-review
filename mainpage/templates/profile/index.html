@@ -68,11 +68,32 @@
                                     </ol>
                                 </div>
                             </div>
+                            <div class="col-md-6 mt-sm-30">
+                                <h3 class="mb-20">My Request</h3>
+                                <div class="progress-table-wrap scroll670">
+                                    <div class="progress-table bgtb">
+                                        <div class="table-head">
+                                            <div class="serial">#</div>
+                                            <div class="country">Book</div>
+                                            <div class="visit">Status</div>
+                                        </div>
+                                        {% for request in list_request %}
+                                            <div class="table-row">
+                                                <div class="serial">{{ forloop.counter }}</div>
+                                                <div class="country">
+                                                    <img style="max-height: 30px" src="{{ request.book.image_url }}" alt="flag">
+                                                    <a href="{% url 'book-detail' request.book.id %}">{{ request.book.title }}</a>
+                                                </div>
+                                                <div class="visit {{ request.status }}CL">{{ request.status }}</div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 {% endblock content %}

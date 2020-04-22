@@ -17,7 +17,9 @@
     })
 
     $('#addFavorite').click(function () {
-        console.log('submit')
         $('#formAddFavorite').submit()
     })
+
+    $('.statusReq')
+    console.log($('.statusReq'))
 }(jQuery));

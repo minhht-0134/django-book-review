@@ -4,6 +4,7 @@ from .components.comments import *
 from .components.favorite import *
 from .components.profile import *
 from .components.markbook import *
+from .components.requestbook import *
 
 urlpatterns = [
     path('home/', MainPage.as_view(), name='mainpage'),
@@ -14,5 +15,6 @@ urlpatterns = [
     path('book/<int:pk>/favorite', FavoriteView.as_view(), name='add-favorite'),
     path('book/<int:pk>/markread', MarkReadView.as_view(), name='mark-read'),
     path('book/<int:pk>/markreading', MarkReadingView.as_view(), name='mark-reading'),
-    path('user/<int:pk>/profile', ProfileView.as_view(), name='profile'),
+    path('book/<int:pk>/requestbook', RequestBookView.as_view(), name='request-book'),
+    path('my-profile', ProfileView.as_view(), name='profile'),
 ]

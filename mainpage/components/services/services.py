@@ -1,4 +1,4 @@
-from books.models import Rate
+from books.models import *
 
 def check_logged(request):
     if request.user.is_authenticated:
@@ -32,3 +32,11 @@ def check_rate(user, book):
         return check_rate
     except:
         return False
+    
+def check_request(user, book):
+    try:
+        req = RequestBook.objects.get(user=user, book=book)
+    except:
+        return None
+    return req.status
+    

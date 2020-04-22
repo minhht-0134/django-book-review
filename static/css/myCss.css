@@ -92,7 +92,7 @@ a.disabled {
 .font_sans {
     font-family: sans-serif;
     color: #797979;
-    margin-left: 20px;
+    /*margin-left: 20px;*/
 }
 .rateHeight {
     height: 80px !important;
@@ -139,9 +139,29 @@ a.disabled {
 .clGray {
     color: #797979;
 }
-
+.greenCL {
+    color: green;
+}
+.redCL {
+    color: red;
+}
+.blueCL {
+    color: blue;
+}
 .scroll670 {
     max-height: 550px;
     overflow: scroll;
     overflow-x: hidden !important;
+}
+.canceledCL {
+    color: red;
+}
+.pendingCL {
+    color: blue;
+}
+.approvedCL {
+    color: green;
+}
+.bgtb {
+    background-color: hsla(222, 77%, 71%, 0);
 }

@@ -28,7 +28,36 @@
             {% if check_reading %}
                 <i class='fas fa-check'></i>
             {% endif %}
-        </a>
+        </a><br>
+        {% if request_status == 'pending' %}
+            <br>
+            <span class="font_sans">
+                Your request to buy a new this book is <span class="blueCL">Pending</span>. <br>
+                Or you can <a href="{% url 'request-book' book.id %}">Cancel it!</a>
+            </span>
+        {% elif request_status == 'canceled' %}
+            <form action="{% url 'request-book' book.id %}" method="post">
+                {% csrf_token %}
+                <span class="font_sans">Your request to buy a new this book is
+                    <span class="redCL">Canceled</span>.<br>
+                    Or you can send again: <br></span>
+                <button class="genric-btn primary-border medium" type="submit">Send again</button>
+            </form>
+        {% elif request_status == 'approved' %}
+            <form action="{% url 'request-book' book.id %}" method="post">
+                {% csrf_token %}
+                <span class="font_sans">Your request to buy a new this book is
+                    <span class="greenCL">Approved</span>.<br>
+                    Or you can send again: <br></span>
+                <button class="genric-btn primary-border medium" type="submit">Send again</button>
+            </form>
+        {% else %}
+            <form action="{% url 'request-book' book.id %}" method="post">
+                {% csrf_token %}
+                Send a request to buy a new this book: <br>
+                <button class="genric-btn primary-border medium" type="submit">Send</button>
+            </form>
+        {% endif %}
     </p>
     <div class="card_area d-flex justify-content-between align-items-center">
         {% if book.book_url %}

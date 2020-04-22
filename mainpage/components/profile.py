@@ -12,6 +12,7 @@ class ProfileView(LoginRequiredMixin, ListView):
         actions = repositories.my_actions(current_user)
         my_favorites = repositories.my_favorites(current_user)
         read , reading = repositories.my_mark(current_user)
+        list_request = repositories.list_request(current_user)
         obj = {
             'current_user': current_user,
             'logged': logged,
@@ -19,6 +20,7 @@ class ProfileView(LoginRequiredMixin, ListView):
             'my_favorites': my_favorites,
             'my_markread': read,
             'my_markreading': reading,
+            'list_request': list_request,
         }
         return render(request, template_name, obj)
     

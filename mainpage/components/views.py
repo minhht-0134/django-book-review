@@ -80,6 +80,7 @@ class BookDetailView(LoginRequiredMixin, ListView):
         best_book = books.order_by("-score_rate")[:10]
         check_favorite = services.check_favorite(Favorite, book, current_user)
         check_read, check_reading = services.check_mark(MarkBook, book, current_user)
+        request_status = services.check_request(current_user, book)
         obj = {
             'current_user': current_user,
             'logged': logged,
@@ -90,6 +91,7 @@ class BookDetailView(LoginRequiredMixin, ListView):
             'check_favorite': check_favorite,
             'check_read': check_read,
             'check_reading': check_reading,
+            'request_status': request_status,
         }
         return render(request, template_name, obj)
 

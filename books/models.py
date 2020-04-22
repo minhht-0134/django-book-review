@@ -102,6 +102,7 @@ class Favorite(models.Model):
     user = models.ForeignKey(User, related_name='user_favorite', on_delete=models.CASCADE)
     book = models.ForeignKey(Book, related_name='book_favorite', on_delete=models.CASCADE)
 
+
 class Action(models.Model):
     ACTION_CHOICES = [
         ('add', 'added'),
@@ -143,3 +144,22 @@ class MarkBook(models.Model):
     )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    
+
+class RequestBook(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'pending'),
+        ('approved', 'approved'),
+        ('canceled', 'canceled'),
+    ]
+    user = models.ForeignKey(User, related_name='user_request', on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, related_name='book_request', on_delete=models.CASCADE)
+    status = models.CharField(
+        max_length=10,
+        choices=STATUS_CHOICES,
+        default='pending'
+    )
+    content = models.CharField(max_length=255, null=True, blank=False)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    

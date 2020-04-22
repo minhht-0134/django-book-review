@@ -58,7 +58,7 @@ def my_mark(current_user):
     return read, reading
 
 def my_actions(current_user):
-    items = Action.objects.filter(user=current_user).order_by('-time_action')[:10]
+    items = Action.objects.filter(user=current_user).order_by('-time_action')[:100]
     return items
 
 def mark_read_or_reading(pk, current_user, type_mark):
@@ -128,4 +128,39 @@ def edit_comment(comment_id, user, content_data):
     comment.save()
     content = f"You have edited your comment"
     save_action(user, content, 'edited')
-    
+
+def send_request_book(user, pk):
+    book = Book.objects.get(pk=pk)
+    try:
+        requestbook = RequestBook.objects.get(
+            user=user,
+            book=book
+        )
+        requestbook.status = 'pending'
+        requestbook.save()
+    except:
+        request_book = RequestBook(
+            user=user,
+            book=book
+        )
+        request_book.save()
+    content = f"You have sent a request to buy a new '{book.title}' book."
+    save_action(user,content, 'add')
+        
+def cancel_request(user, pk):
+    try:
+        book = Book.objects.get(pk=pk)
+        find_request = RequestBook.objects.get(
+            user=user,
+            book=book,
+        )
+        find_request.status = 'canceled'
+        find_request.save()
+        content = f"You have canceled a request to buy a new '{book.title}' book."
+        save_action(user,content, 'add')
+    except:
+        pass
+
+def list_request(current_user):
+    items = RequestBook.objects.filter(user=current_user).order_by('-status')
+    return items
