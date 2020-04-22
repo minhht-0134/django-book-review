@@ -1,0 +1,78 @@
+{% extends 'layouts/index.html' %}
+{% load static %}
+{% block title %}
+    Profile | {{ block.super }}
+{% endblock %}
+{% block content %}
+    <section class="cat_product_area section_padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="section_tittle text-center">
+                        <h2>{{ current_user }}</h2>
+                        <p>BookDev <span>-</span> Profile</p>
+                    </div>
+                </div>
+            </div>
+            <div class="whole-wrap">
+                <div class="container box_1170">
+                    <div class="section-top-border">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3 class="mb-20">My Timelines</h3>
+                                <div class="scroll670">
+                                    <ul class="unordered-list">
+                                        {% for action in actions %}
+                                            <div class="timeline-item" date-is='{{ action.get_time }}'>
+                                                <p>{{ action.content_action }}</p>
+                                            </div>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-sm-30">
+                                <h3 class="mb-20">My Mark Read</h3>
+                                <div class="scroll670">
+                                    <ol class="ordered-list">
+                                        {% for mark in my_markread %}
+                                            <li><span><a href="{% url 'book-detail' mark.book.id %}">
+                                                {{ mark.book.title }}
+                                            </a></span></li>
+                                        {% endfor %}
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-sm-30">
+                                <h3 class="mb-20">My Mark Reading</h3>
+                                <div class="scroll670">
+                                    <ol class="ordered-list">
+                                        {% for reading in my_markreading %}
+                                            <li><span><a href="{% url 'book-detail' reading.book.id %}">
+                                                {{ reading.book.title }}
+                                            </a></span></li>
+                                        {% endfor %}
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 100px">
+                            <div class="col-md-4 mt-sm-30">
+                                <h3 class="mb-20">My Favorite books</h3>
+                                <div class="scroll670">
+                                    <ol class="ordered-list">
+                                        {% for favorite in my_favorites %}
+                                            <li><span><a href="{% url 'book-detail' favorite.book.id %}">
+                                                {{ favorite.book.title }}
+                                            </a></span></li>
+                                        {% endfor %}
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+{% endblock content %}

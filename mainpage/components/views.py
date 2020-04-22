@@ -1,32 +1,14 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from quotes.models import Quote
 from books.models import *
 from books.form import *
-
-
-class Data():
-    def getbook(self):
-        print("okkkkkkkkkkkkk")
-
+from .services import services
+from .repositories import repositories
 
 class MainPage(LoginRequiredMixin, ListView):
-    def check_logged(self, request):
-        if request.user.is_authenticated:
-            current_user = request.user
-            return True, current_user
-        return False, None
-    
-    def total_book(self):
-        total = Book.objects.all().count()
-        return total
-    
-    def get_categories(self):
-        categories = Category.objects.all()
-        return categories
-    
     def get_books(self, request, objects):
         page = request.GET.get('page', 1)
         paginator = Paginator(objects, 6)
@@ -46,14 +28,15 @@ class MainPage(LoginRequiredMixin, ListView):
     
     def get(self, request, *args, **kwargs):
         template_name = 'mainpage/index.html'
-        logged, current_user = self.check_logged(request)
-        books = Book.objects.all()
-        book_count = self.total_book()
-        categories = self.get_categories()
         category_id = request.GET.get('category')
         search_key = request.GET.get('search')
         search_count = None
-        best_book = Book.objects.all().order_by("-score_rate")[:10]
+        
+        logged, current_user = services.check_logged(request)
+        _, books, book_count = repositories.get_one_or_all_or_count(Book)
+        _, categories, _ = repositories.get_one_or_all_or_count(Category)
+        best_book = books.order_by("-score_rate")[:10]
+        
         if search_key:
             books = Book.objects.filter(title__icontains=search_key)
             search_count = books.count()
@@ -65,7 +48,7 @@ class MainPage(LoginRequiredMixin, ListView):
         else:
             page, books, total_book = self.filter_category(category_id, request)
             category_id = int(category_id)
-        
+            
         obj = {
             'current_user': current_user,
             'logged': logged,
@@ -83,35 +66,30 @@ class MainPage(LoginRequiredMixin, ListView):
 
 
 class BookDetailView(LoginRequiredMixin, ListView):
-    def check_logged(self, request):
-        if request.user.is_authenticated:
-            current_user = request.user
-            return True, current_user
-        return False, None
-    
-    def get_book(self, pk):
-        book = Book.objects.get(pk=pk)
-        return book
-    
     def get_rate(self, book):
-        # rate = Rate.objects.filter(book=book).order_by('-id')
         rate = Rate.objects.filter(book=book).order_by('-id')[:3]
         return rate
     
     def get(self, request, *args, **kwargs):
         template_name = 'bookdetail/index.html'
-        logged, current_user = self.check_logged(request)
-        book = self.get_book(kwargs.get('pk'))
-        books = Book.objects.all()
+        pk = kwargs.get('pk')
+        
+        logged, current_user = services.check_logged(request)
+        book, books, _ = repositories.get_one_or_all_or_count(Book, pk)
         get_rates = self.get_rate(book)
-        best_book = Book.objects.all().order_by("-score_rate")[:10]
+        best_book = books.order_by("-score_rate")[:10]
+        check_favorite = services.check_favorite(Favorite, book, current_user)
+        check_read, check_reading = services.check_mark(MarkBook, book, current_user)
         obj = {
             'current_user': current_user,
             'logged': logged,
             'book': book,
             'books': books,
             'get_rates': get_rates,
-            'best_book': best_book
+            'best_book': best_book,
+            'check_favorite': check_favorite,
+            'check_read': check_read,
+            'check_reading': check_reading,
         }
         return render(request, template_name, obj)
 
@@ -120,36 +98,17 @@ class RateBookView(LoginRequiredMixin, ListView):
     def post(self, request, *args, **kwargs):
         pk = kwargs.get('pk')
         try:
-            book = Book.objects.get(pk=request.POST.get('book_id'))
+            book_id = request.POST.get('book_id')
+            book, _, _ = repositories.get_one_or_all_or_count(Book, book_id)
+            
             user = request.user
-            try:
-                check_rate = Rate.objects.get(user=user, book=book)
-            except:
-                check_rate = None
             rate_data = request.POST.get('rate')
             review_data = request.POST.get('review')
+            check_rate = services.check_rate(user, book)
             if check_rate:
-                old_rate = check_rate.score
-                book.score_rate = book.score_rate - old_rate + int(rate_data)
-                check_rate.score = rate_data
-                check_rate.review = review_data
-                check_rate.edited = True
-                book.save()
-                check_rate.save()
+                repositories.have_rate(book, check_rate, rate_data, review_data)
             else:
-                create_rate = Rate(
-                    book=book,
-                    user=user,
-                    score=rate_data,
-                    review=review_data,
-                )
-                create_rate.save()
-                old_score = book.score_rate
-                old_total = book.total_rate
-                book.score_rate = old_score + int(rate_data)
-                book.total_rate = old_total + 1
-                book.save()
-        
+                repositories.havent_rate(book, user, rate_data, review_data)
         except:
             return redirect('book-detail', pk=pk)
         return redirect('book-detail', pk=pk)

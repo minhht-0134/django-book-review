@@ -15,4 +15,9 @@
     $('.btn_delete_comment').click(function () {
         return confirm('Are you sure you want to delete this?');
     })
+
+    $('#addFavorite').click(function () {
+        console.log('submit')
+        $('#formAddFavorite').submit()
+    })
 }(jQuery));

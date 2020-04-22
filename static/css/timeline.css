@@ -1,0 +1,33 @@
+.timeline-item {
+    padding: 2em 2em 2em;
+    position: relative;
+    color: #828bb2;
+    border-left: 2px solid red;
+}
+
+.timeline-item::before {
+		content: attr(date-is);
+		position: absolute;
+		left: 2em;
+		font-weight: bold;
+		top: 1em;
+		display: block;
+		font-family: 'Roboto', sans-serif;
+		font-size: .785rem;
+	}
+
+.timeline-item::after {
+		width: 10px;
+		height: 10px;
+		display: block;
+		top: 1em;
+		position: absolute;
+		left: -7px;
+		border-radius: 10px;
+		content: '';
+		border: 2px solid #828bb2;
+		background: white;
+}
+
+.timeline-item:last-child {
+		border-image: linear-gradient(to bottom, #ff3368 60%, white) 1 100%;)}

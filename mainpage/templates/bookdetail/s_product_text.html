@@ -9,12 +9,26 @@
             <a class="active disabled" href="#"><span>Author</span> : {{ book.author }}</a>
         </li>
         <li>
-            <a class="active disabled" href="#"><span>Seen</span> : N/A</a>
+            <a class="active disabled" href="#"><span>Publish</span> : {{ book.get_publist }}</a>
+        </li>
+        <li>
+            <a class="active disabled" href="#"><span>Page</span> : {{ book.pages }}</a>
         </li>
     </ul>
     <p>
-        First replenish living. Creepeth image image. Creeping can't, won't called.
-        Two fruitful let days signs sea together all land fly subdue
+        Mark this book: <br>
+        <a href="{% url 'mark-read' book.id %}" class="genric-btn primary-border medium">
+            Read
+            {% if check_read %}
+                <i class='fas fa-check'></i>
+            {% endif %}
+        </a>
+        <a href="{% url 'mark-reading' book.id %}" class="genric-btn primary-border medium">
+            Reading
+            {% if check_reading %}
+                <i class='fas fa-check'></i>
+            {% endif %}
+        </a>
     </p>
     <div class="card_area d-flex justify-content-between align-items-center">
         {% if book.book_url %}
@@ -22,11 +36,16 @@
         {% endif %}
         <a href="#" class="like_us" title="Share your facebook"> <i
                 class="ti-facebook colorFacebook"></i> </a>
-
         <a href="#" class="like_us" title="Unlike"> <i class="fa fa-thumbs-up colorLike"></i> </a>
-        {#                  <a href="#" class="like_us" title="Like"> <i class="fa fa-thumbs-up"></i> </a>#}
-
-        {#                  <a href="#" class="like_us" title="Remove from favorite"> <i class="fa fa-heart colorFavorite"></i> </a>#}
-        <a href="#" class="like_us" title="Add to favorite"> <i class="fa fa-heart"></i> </a>
+        {% if check_favorite %}
+            <a href="{% url 'add-favorite' book.id %}" class="like_us" title="Remote from favorite">
+                <i class="fa fa-heart colorFavorite"></i>
+            </a>
+        {% else %}
+            <form id="formAddFavorite" action="{% url 'add-favorite' book.id %}" class="like_us" method="post">
+                {% csrf_token %}
+                <a id="addFavorite" href="#" title="Add to favorite"> <i class="fa fa-heart clGray"></i></a>
+            </form>
+        {% endif %}
     </div>
 </div>

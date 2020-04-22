@@ -1,5 +1,9 @@
 @import "rate.css";
+@import "timeline.css";
 
+body {
+    font-family: sans-serif !important;
+}
 .color-red {
     color: red;
 }
@@ -128,4 +132,16 @@ a.disabled {
 }
 .reviewImg{
     max-height: 100% !important;
+}
+.like_us a {
+    display: block;
+}
+.clGray {
+    color: #797979;
+}
+
+.scroll670 {
+    max-height: 550px;
+    overflow: scroll;
+    overflow-x: hidden !important;
 }

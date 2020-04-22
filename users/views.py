@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, LogoutView
 from django.conf import settings
 from django.shortcuts import render
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Customer
 from .form import RegisterForm
@@ -27,3 +28,4 @@ class Register(CreateView):
     form_class = RegisterForm
     template_name = 'registrations/register.html'
     success_url = '/registration/signin/'
+    
