@@ -14,7 +14,7 @@ class Category(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=255, null=False, blank=False)
-    publish_date = models.DateTimeField(auto_now_add=True)
+    publish_date = models.DateTimeField()
     author = models.CharField(max_length=255, null=False, blank=False)
     pages = models.IntegerField(default=0)
     score_rate = models.FloatField(default=0)
@@ -41,6 +41,14 @@ class Book(models.Model):
         year = self.publish_date.year
         publish = f"{day}/{month}/{year}"
         return publish
+    
+    def trunc_title(self):
+        trunc = self.title
+        if len(trunc)>20:
+            return trunc[0:20] + "..."
+        else:
+            return trunc
+        
 
 
 class Rate(models.Model):
@@ -96,7 +104,13 @@ class Comment(models.Model):
         hour = self.updated.hour
         create_at = f"on {day}/{month}/{year} at {hour}:{minute}"
         return create_at
-
+    
+    def trunc_cmt(self):
+        trunc = self.content
+        if len(trunc)>50:
+            return trunc[0:50] + "..."
+        else:
+            return trunc
 
 class Favorite(models.Model):
     user = models.ForeignKey(User, related_name='user_favorite', on_delete=models.CASCADE)

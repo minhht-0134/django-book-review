@@ -1,0 +1,31 @@
+<button class="btn btn-block btn-outline-primary btn-sm btnNew" data-toggle="modal" data-target="#modal-createCategory">
+    New Category
+</button>
+<div class="modal fade" id="modal-createCategory">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Create New Category</h3>
+                    </div>
+                    <form role="form" method="post" action="{% url 'create-category' %}">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Name</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1"
+                                       placeholder="Enter name category" name="name" required>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Create Now</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

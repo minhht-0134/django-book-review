@@ -6,12 +6,19 @@ def check_logged(request):
         return True, current_user
     return False, None
 
-def check_favorite(model, book, user):
+def check_favorite(book, user):
     try:
-        model.objects.get(user=user, book=book)
+        Favorite.objects.get(user=user, book=book)
         return True
     except:
         return False
+    
+def check_rated(book, user):
+    try:
+        rated = Rate.objects.get(user=user, book=book)
+        return True, rated
+    except:
+        return False, []
 
 def check_mark(model, book, user):
     read = False
@@ -39,4 +46,10 @@ def check_request(user, book):
     except:
         return None
     return req.status
+
+def check_admin(current_user):
+    if current_user.is_superuser:
+        return True
+    else:
+        return False
     

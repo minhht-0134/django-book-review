@@ -1,0 +1,33 @@
+<div class="modal fade" id="modal-editQuote{{ quote.id }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit Quote</h3>
+                    </div>
+                    <form role="form" method="post" action="{% url 'edit-quote' quote.id %}">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Content</label>
+                                <textarea name="content" id="inputDescription"
+                                          class="form-control" rows="4" required>{{ quote.content }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Author</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1"
+                                       placeholder="Enter author quote" name="author" value="{{ quote.author }}" required>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Update Now</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

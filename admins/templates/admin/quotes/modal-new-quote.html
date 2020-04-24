@@ -1,0 +1,36 @@
+<button class="btn btn-block btn-outline-primary btn-sm btnNew" data-toggle="modal" data-target="#modal-createQoute">
+    New Qoute
+</button>
+<div class="modal fade" id="modal-createQoute">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Create New Qoute</h3>
+                    </div>
+                    <form role="form" method="post" action="{% url 'create-quote' %}">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="inputcontent">Content</label>
+                                <textarea name="content" id="inputcontent"
+                                          class="form-control" rows="4" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Author</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1"
+                                       placeholder="Enter author quote" name="author" required>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Create Now</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

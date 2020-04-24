@@ -9,6 +9,7 @@ urlpatterns = [
     path('registration/', include('users.urls')),
     path('', include('homepage.urls')),
     path('', include('mainpage.urls')),
+    path('managements/', include('admins.urls')),
 ]
 # if settings.DEBUG:
 #     urlpatterns = [

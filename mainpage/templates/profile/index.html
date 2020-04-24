@@ -9,7 +9,13 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="section_tittle text-center">
-                        <h2>{{ current_user }}</h2>
+                        <h2>
+                            {% if username %}
+                                {{ username }}
+                            {% else %}
+                                {{ current_user }}
+                            {% endif %}
+                        </h2>
                         <p>BookDev <span>-</span> Profile</p>
                     </div>
                 </div>
@@ -81,7 +87,8 @@
                                             <div class="table-row">
                                                 <div class="serial">{{ forloop.counter }}</div>
                                                 <div class="country">
-                                                    <img style="max-height: 30px" src="{{ request.book.image_url }}" alt="flag">
+                                                    <img style="max-height: 30px" src="{{ request.book.image_url }}"
+                                                         alt="flag">
                                                     <a href="{% url 'book-detail' request.book.id %}">{{ request.book.title }}</a>
                                                 </div>
                                                 <div class="visit {{ request.status }}CL">{{ request.status }}</div>

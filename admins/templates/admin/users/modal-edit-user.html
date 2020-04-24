@@ -1,0 +1,32 @@
+<div class="modal fade" id="modal-editPassw{{ user.id }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Change password '{{ user.username }}'</h3>
+                    </div>
+                    <form role="form" method="post" action="{% url 'changepw-user' user.id %}">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <label for="pwchange">Password</label>
+                            <input type="password" class="form-control" id="pwchange"
+                                   placeholder="Enter new password" name="passw" required>
+                        </div>
+                        <div class="card-body">
+                            <label for="confirmpw">Password Confirm</label>
+                            <input type="password" class="form-control" id="confirmpw"
+                                   placeholder="Enter confirm password" name="passw_confirm" required>
+                        </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Update Now</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+</div>

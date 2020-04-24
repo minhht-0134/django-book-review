@@ -145,6 +145,9 @@ a.disabled {
 .redCL {
     color: red;
 }
+.waringCL{
+    color: orange;
+}
 .blueCL {
     color: blue;
 }
@@ -164,4 +167,9 @@ a.disabled {
 }
 .bgtb {
     background-color: hsla(222, 77%, 71%, 0);
+}
+
+.reviewd {
+    font-weight: initial;
+    color: #797979;
 }

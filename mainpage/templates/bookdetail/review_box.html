@@ -1,5 +1,19 @@
 <div class="review_box">
     <h4>Add a Review</h4>
+    {% if check_rated %}
+        <h5>
+            You has rate:
+            {% for foo in rated.make_range %}
+                <i class="fas fa-star text-warning"></i>
+            {% endfor %}
+
+        </h5>
+        <h5>
+            You has review:
+            <span class="reviewd">{{ rated.review }}</span>
+        </h5>
+
+    {% endif %}
     <p>Your Rating:</p>
     <div class="rate list">
         <input type="radio" id="star5" name="rate" value="5"/>

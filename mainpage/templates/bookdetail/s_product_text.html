@@ -39,7 +39,7 @@
             <form action="{% url 'request-book' book.id %}" method="post">
                 {% csrf_token %}
                 <span class="font_sans">Your request to buy a new this book is
-                    <span class="redCL">Canceled</span>.<br>
+                    <span class="waringCL">Canceled</span>.<br>
                     Or you can send again: <br></span>
                 <button class="genric-btn primary-border medium" type="submit">Send again</button>
             </form>

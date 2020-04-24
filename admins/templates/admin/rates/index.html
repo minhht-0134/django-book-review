@@ -1,0 +1,86 @@
+{% extends 'admin/layouts/index.html' %}
+{% load static %}
+{% block title %}
+    Review Manager | {{ block.super }}
+{% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Review Management</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Review Management</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">List Reviews</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Avt Book</th>
+                                    <th>Book</th>
+                                    <th>Assessor</th>
+                                    <th>Stars</th>
+                                    <th>Review</th>
+                                    <th>Edited</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for rate in list_rates %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td class="pd-0">
+                                            <img class="avt-list" src="{{ rate.book.image_url }}" alt="">
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'book-detail' rate.book.id %}">{{ rate.book.title }}</a>
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'user-info' rate.user.id %}">{{ rate.user }}</a>
+                                        </td>
+                                        <td>
+                                            {% for foo in rate.make_range %}
+                                                <i class="fas fa-star starCL"></i>
+                                            {% endfor %}
+                                        </td>
+                                        <td>{{ rate.review }}</td>
+                                        <td>
+                                            {% if rate.edited %}
+                                                <i class="fas fa-check-circle text-success"></i>
+                                            {% endif %} </td>
+                                        <td>
+                                            <a class="btn btn-danger btn-sm confirm_delete"
+                                               href="{% url 'delete-rate' rate.id %}">
+                                                <i class="fas fa-trash"></i>Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+{% endblock %}

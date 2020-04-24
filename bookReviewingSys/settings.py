@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'quotes.apps.QuotesConfig',
     'mainpage.apps.MainpageConfig',
     'books.apps.BooksConfig',
+    'admins.apps.AdminsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

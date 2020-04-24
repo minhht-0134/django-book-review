@@ -1,0 +1,97 @@
+{% extends 'admin/layouts/index.html' %}
+{% load static %}
+{% block title %}
+    Requests Manager | {{ block.super }}
+{% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Request Management</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Request Management</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">List Requests</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Avt Book</th>
+                                    <th>Book</th>
+                                    <th>User</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in list_requests %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td class="pd-0">
+                                            <img class="avt-list" src="{{ item.book.image_url }}" alt="">
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'book-detail' item.book.id %}">{{ item.book.title }}</a>
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'user-info' item.user.id %}">{{ item.user }}</a>
+                                        </td>
+
+                                        <td>
+                                            {% if item.status == 'pending' %}
+                                                <span class="badge bg-primary">{{ item.status }}</span>
+                                            {% endif %}
+                                            {% if item.status == 'approved' %}
+                                                <span class="badge bg-success">{{ item.status }}</span>
+                                            {% endif %}
+                                            {% if item.status == 'canceled' %}
+                                                <span class="badge bg-warning">{{ item.status }}</span>
+                                            {% endif %}
+
+                                        </td>
+                                        <td>
+                                            {% if item.status == 'pending' %}
+                                                <a class="btn btn-success btn-sm"
+                                                   href="{% url 'approve-request' item.id %}">
+                                                    <i class="fas fa-check-circle"></i> Approve
+                                                </a>
+                                                <a class="btn btn-warning btn-sm"
+                                                   href="{% url 'cancel-request' item.id %}">
+                                                    <i class="fas fa-times-circle"></i> Cancel
+                                                </a>
+                                            {% endif %}
+                                            <a class="btn btn-danger btn-sm confirm_delete"
+                                               href="{% url 'delete-request' item.id %}">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+{% endblock %}

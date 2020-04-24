@@ -1,13 +1,14 @@
 from django.core.management.base import BaseCommand
 from books.models import *
 from quotes.models import *
+from django.contrib.auth.models import User
 import random
 
 # python manage.py seed --mode=<SINGLE MODEL>
 
 CLEAR_DATA = 'clear'
-SINGLE_MODEL = ['Category', 'Book', 'Quote']
-MODELS = [Category, Book, Quote]
+SINGLE_MODEL = ['Category', 'Book', 'Quote', 'User']
+MODELS = [Category, Book, Quote, User]
 
 
 class Command(BaseCommand):
@@ -127,7 +128,6 @@ def create_quotes():
 def create_categories():
     print('Creating categories...')
     data_categories = [
-        'Y Học- Sức Khỏe',
         'Tâm Lý - Kỹ Năng Sống',
         'Kinh Tế - Quản Lý',
         'Marketing - Bán hàng',
@@ -283,6 +283,57 @@ def create_books():
     print('Books created!')
     return book
 
+def create_users():
+    print('Creating user!')
+    data_users = []
+    user = None
+    for i in range(20):
+        # try:
+        #     name = f"User {i}"
+        #     User.objects.get(username=name).delete()
+        # except:
+        #     pass
+        data_users.append({
+            'username': f"User {i}",
+            'email': f"emailuser{i}@gmail.com",
+            'password': f"123",
+        })
+    for data in data_users:
+        user = User(
+            username=data.get('username'),
+            email=data.get('email'),
+            password=data.get('password'),
+        )
+        user.set_password(data.get('password'))
+        user.save()
+    user_admin = User(
+        username='admin',
+        email='admin@gmail.com',
+        is_superuser=1,
+        is_staff=1,
+    )
+    user_admin.set_password('admin')
+    user_admin.save()
+    print('Created user!')
+    return user
+
+def create_favorite():
+    print('Creating Favorite!')
+    favorites = Favorite.objects.all()
+    for i in favorites:
+        i.delete()
+    users = User.objects.all()
+    books = Book.objects.all()
+
+    user_ids = [i for i in map(lambda x: x, users)]
+    book_ids = [i for i in map(lambda x: x, books)]
+    for i in range(20):
+        favo = Favorite(
+            user=random.choice(user_ids),
+            book=random.choice(book_ids),
+        )
+        favo.save()
+    print('Created Favorite!')
 
 def create(model):
     if model == SINGLE_MODEL[0]:
@@ -300,6 +351,8 @@ def run_seed(self, mode):
         create_quotes()
         create_categories()
         create_books()
+        create_users()
+        # create_favorite()
     elif mode == CLEAR_DATA:
         clear_data()
     elif mode not in SINGLE_MODEL:

@@ -1,0 +1,31 @@
+.topRank_1 {
+      background: #9c30c9 linear-gradient(180deg, #330a5c, #8635e3) repeat-x !important;
+}
+.topRank_2 {
+    background: #3b6ae2 linear-gradient(180deg, #339274, #5c91e3) repeat-x !important;
+}
+.topRank_3 {
+    background: #cbd71c linear-gradient(180deg, #bd910b, #e7bd1d) repeat-x !important;
+}
+.topRank_4 {
+    background: #e32652 linear-gradient(180deg, #d96292, #9c0149) repeat-x !important;
+}
+.imgTop {
+    min-width: 45px;
+    height: 70px;
+}
+
+.avt-list {
+    max-height: 70px;
+}
+.pd-0 {
+    /*padding: 10px 10px !important;*/
+}
+.btnNew {
+    max-width: 110px;
+    float: right;
+}
+
+.starCL {
+    color: yellow;
+}

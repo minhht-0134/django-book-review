@@ -1,0 +1,85 @@
+{% extends 'admin/layouts/index.html' %}
+{% load static %}
+{% block title %}
+    User Manager | {{ block.super }}
+{% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">User Management</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">User Management</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">List Users</h3>
+                            {#                            {% include 'admin/users/modal-new-user.html' %}#}
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Last Login</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for user in list_users %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>
+                                            <a href="{% url 'user-info' user.id %}">{{ user.username }}</a>
+                                        </td>
+                                        <td>{{ user.email }}</td>
+                                        <td>
+                                            {% if user.is_superuser %}
+                                                <span class="text-success">Administrator</span>
+                                            {% else %}
+                                                Custommer
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ user.last_login }}</td>
+                                        <td>
+                                            {% if not user.is_superuser %}
+                                                <a class="btn btn-info btn-sm" href="#" data-toggle="modal"
+                                                   data-target="#modal-editPassw{{ user.id }}">
+                                                    <i class="fas fa-edit"></i>Change Password
+                                                </a>
+                                                <a class="btn btn-danger btn-sm confirm_delete"
+                                                   href="{% url 'delete-user' user.id %}">
+                                                    <i class="fas fa-trash"></i>Delete
+                                                </a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% include 'admin/users/modal-edit-user.html' with user=user %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+{% endblock %}

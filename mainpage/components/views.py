@@ -48,7 +48,8 @@ class MainPage(LoginRequiredMixin, ListView):
         else:
             page, books, total_book = self.filter_category(category_id, request)
             category_id = int(category_id)
-            
+
+        current_admin = services.check_admin(current_user)
         obj = {
             'current_user': current_user,
             'logged': logged,
@@ -60,7 +61,8 @@ class MainPage(LoginRequiredMixin, ListView):
             'q_category': category_id,
             'search_count': search_count,
             'search_key': search_key,
-            'best_book': best_book
+            'best_book': best_book,
+            'current_admin': current_admin
         }
         return render(request, template_name, obj)
 
@@ -78,9 +80,11 @@ class BookDetailView(LoginRequiredMixin, ListView):
         book, books, _ = repositories.get_one_or_all_or_count(Book, pk)
         get_rates = self.get_rate(book)
         best_book = books.order_by("-score_rate")[:10]
-        check_favorite = services.check_favorite(Favorite, book, current_user)
+        check_favorite = services.check_favorite(book, current_user)
+        check_rated, rated = services.check_rated(book, current_user)
         check_read, check_reading = services.check_mark(MarkBook, book, current_user)
         request_status = services.check_request(current_user, book)
+        current_admin = services.check_admin(current_user)
         obj = {
             'current_user': current_user,
             'logged': logged,
@@ -89,9 +93,12 @@ class BookDetailView(LoginRequiredMixin, ListView):
             'get_rates': get_rates,
             'best_book': best_book,
             'check_favorite': check_favorite,
+            'check_rated': check_rated,
+            'rated': rated,
             'check_read': check_read,
             'check_reading': check_reading,
             'request_status': request_status,
+            'current_admin': current_admin
         }
         return render(request, template_name, obj)
 

@@ -17,4 +17,5 @@ urlpatterns = [
     path('book/<int:pk>/markreading', MarkReadingView.as_view(), name='mark-reading'),
     path('book/<int:pk>/requestbook', RequestBookView.as_view(), name='request-book'),
     path('my-profile', ProfileView.as_view(), name='profile'),
+    path('user/<int:user_id>/profile', UserInfoView.as_view(), name='user-info'),
 ]

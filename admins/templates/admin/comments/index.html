@@ -1,0 +1,88 @@
+{% extends 'admin/layouts/index.html' %}
+{% load static %}
+{% block title %}
+    Comment Manager | {{ block.super }}
+{% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Comment Management</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Comment Management</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">List Comments</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Avt Book</th>
+                                    <th>Book</th>
+                                    <th>Assessor</th>
+                                    <th>Commentator</th>
+                                    <th>Content</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for comment in list_comments %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td class="pd-0">
+                                            <img class="avt-list" src="{{ comment.rate.book.image_url }}" alt="">
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'book-detail' comment.rate.book.id %}">{{ comment.rate.book.title }}</a>
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'user-info' comment.rate.user.id %}">
+                                                {{ comment.rate.user }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'user-info' comment.user.id %}">
+                                                {{ comment.user }}
+                                            </a>
+                                        </td>
+                                        <td>{{ comment.trunc_cmt }}</td>
+                                        <td>
+                                            <a class="btn btn-info btn-sm" data-toggle="modal"
+                                               data-target="#modal-view-content{{ comment.id }}" href="#">
+                                                <i class="fas fa-eye"></i> Info Content
+                                            </a>
+                                            <a class="btn btn-danger btn-sm confirm_delete"
+                                               href="{% url 'delete-comment' comment.id %}">
+                                                <i class="fas fa-trash"></i>Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% include 'admin/comments/modal-view-content.html' %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+{% endblock %}

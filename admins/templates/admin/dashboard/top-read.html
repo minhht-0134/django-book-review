@@ -1,0 +1,26 @@
+<h5 class="mt-4 mb-2">TOP READ</h5>
+<div class="row">
+    {% for read in top_read %}
+        <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box bg-gradient-info topRank_{{ forloop.counter }}">
+            <span class="info-box-icon">
+                <a href="{% url 'book-detail' read.0.id %}">
+                    <img class="imgTop" src="{{ read.0.image_url }}" alt="">
+                </a>
+            </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">{{ read.0.trunc_title }}</span>
+                    <span class="info-box-number">{{ read.1 }} mark read</span>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 70%"></div>
+                    </div>
+                    <span class="progress-description">
+                        70% Increase in 30 Days
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+    {% endfor %}
+</div>
