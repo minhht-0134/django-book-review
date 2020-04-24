@@ -1,0 +1,158 @@
+{% load sidebar_extras %}
+
+<div class="page-sidebar-wrapper">
+  <div class="page-sidebar navbar-collapse collapse">
+    <ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+      <li class="sidebar-toggler-wrapper">
+        <div class="sidebar-toggler">
+        </div>
+      </li>
+      <li class="margin-top-15 {% if 'timeline' == request.resolver_match.url_name %}active{% endif %}">
+        <a href="{% url 'user:timeline' %}">
+          <i class="icon-home"></i>
+          <span class="title">Dòng thời gian</span>
+          {% if 'timeline' == request.resolver_match.url_name %}
+            <span class="selected"></span>
+          {% endif %}
+        </a>
+      </li>
+      {% if user.role == 1 %}
+        <li class="{% if '/category' in request.path %}active{% endif %}">
+          <a href="javascript:void(0);">
+            <i class="fa fa-sliders"></i>
+            <span class="title">Danh mục sách</span>
+            {% if '/category' in request.path %}
+              <span class="selected"></span>
+            {% endif %}
+            <span class="arrow {% if '/category' in request.path %}open{% endif %}">
+                    </span>
+          </a>
+          <ul class="sub-menu">
+
+            <li class="{% if 'category_create' == request.resolver_match.url_name %}active{% endif %}">
+              <a href="{% url 'book:category_create' %}">
+                <i class="fa fa-plus"></i>
+                Thêm mới
+              </a>
+            </li>
+            <li class="{% if 'category_index' == request.resolver_match.url_name %}active{% endif %}">
+              <a href="{% url 'book:category_index' %}">
+                <i class="fa fa-list-ul"></i>
+                Danh sách
+              </a>
+            </li>
+          </ul>
+        </li>
+      {% endif %}
+      <li class="{% if '/book' in request.path %}active{% endif %}">
+        <a href="javascript:void(0);">
+          <i class="fa fa-book"></i>
+          <span class="title">Thư viện sách</span>
+          {% if '/book' in request.path %}
+            <span class="selected"></span>
+          {% endif %}
+          <span class="arrow {% if '/book' in request.path %}open{% endif %}">
+                    </span>
+        </a>
+        <ul class="sub-menu">
+          {% if user.role == 1 %}
+            <li class="{% if 'book_create' == request.resolver_match.url_name %}active{% endif %}">
+              <a href="{% url 'book:book_create' %}">
+                <i class="fa fa-plus"></i>
+                Thêm mới
+              </a>
+            </li>
+          {% endif %}
+          <li class="{% if 'book_index' == request.resolver_match.url_name and not request.GET.filter_sidebar %}active{% endif %}">
+            <a href="{% url 'book:book_index' %}">
+              <i class="fa fa-list-ul"></i>
+              Tất cả sách
+            </a>
+          </li>
+          <li class="{% if request.GET.favorite == '1' and request.GET.filter_sidebar %}active{% endif %}">
+            <a href="{% url 'book:book_index' %}?filter_sidebar=1&favorite=1">
+              <i class="fa fa-heart"></i>
+              Sách yêu thích
+            </a>
+          </li>
+          <li class="{% if request.GET.read_status == '1' and request.GET.filter_sidebar %}active{% endif %}">
+            <a href="{% url 'book:book_index' %}?filter_sidebar=1&read_status=1">
+              <i class="fa fa-bookmark-o"></i>
+              Sách đang đọc
+            </a>
+          </li>
+          <li class="{% if request.GET.read_status == '2' and request.GET.filter_sidebar %}active{% endif %}">
+            <a href="{% url 'book:book_index' %}?filter_sidebar=1&read_status=2">
+              <i class="fa fa-bookmark"></i>
+              Sách đã đọc
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="{% if '/request' in request.path %}active{% endif %}">
+        <a href="javascript:void(0);">
+          <i class="fa fa-th"></i>
+          <span class="title">Quản lý yêu cầu</span>
+          {% if '/request' in request.path %}
+            <span class="selected"></span>
+          {% endif %}
+          <span class="arrow {% if '/request' in request.path %}open{% endif %}">
+              </span>
+        </a>
+        <ul class="sub-menu">
+          <li class="{% if 'request_create' == request.resolver_match.url_name %}active{% endif %}">
+            <a href="{% url 'user:request_create' %}">
+              <i class="fa fa-plus"></i>
+              Thêm mới yêu cầu
+            </a>
+          </li>
+          <li class="{% if 'my_request' == request.resolver_match.url_name %}active{% endif %}">
+            <a href="{% url 'user:my_request' %}">
+              <i class="icon-user"></i>
+              Yêu cầu của tôi
+            </a>
+          </li>
+          {% if user.role == 1 %}
+            <li class="{% if 'request_index' == request.resolver_match.url_name %}active{% endif %}">
+              <a href="{% url 'user:request_index' %}">
+                <i class="fa fa-list-ul"></i>
+                Danh sách yêu cầu
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </li>
+      <li class="{% if '/member' in request.path %}active{% endif %}">
+        <a href="javascript:void(0);">
+          <i class="icon-users"></i>
+          <span class="title">Thành viên ({% get_total_member %})</span>
+          {% if '/member' in request.path %}
+            <span class="selected"></span>
+          {% endif %}
+          <span class="arrow {% if '/member' in request.path %}open{% endif %}">
+          </span>
+        </a>
+        <ul class="sub-menu">
+          <li class="{% if 'member_index' == request.resolver_match.url_name and not request.GET.filter_sidebar %}active{% endif %}">
+            <a href="{% url 'user:member_index' %}">
+              <i class="fa fa-list-ul"></i>
+              Tất cả thành viên
+            </a>
+          </li>
+          <li class="{% if request.GET.following == '1' and request.GET.filter_sidebar %}active{% endif %}">
+            <a href="{% url 'user:member_index' %}?filter_sidebar=1&following=1">
+              <i class="fa fa-user-md"></i>
+              Đang theo dõi
+            </a>
+          </li>
+          <li class="{% if request.GET.follower == '1' and request.GET.filter_sidebar %}active{% endif %}">
+            <a href="{% url 'user:member_index' %}?filter_sidebar=1&follower=1">
+              <i class="fa fa-users"></i>
+              Người theo dõi
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

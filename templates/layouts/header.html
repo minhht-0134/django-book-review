@@ -1,0 +1,41 @@
+{% load static %}
+
+<div class="page-header -i navbar navbar-fixed-top">
+  <div class="page-header-inner">
+    <div class="page-logo">
+      <a href="{% url 'user:timeline' %}">
+        <img src="{% static 'img/logo.png' %}" alt="logo" class="logo-default"/>
+      </a>
+      <div class="menu-toggler sidebar-toggler hide">
+      </div>
+    </div>
+    <a href="javascript:void(0)" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+    </a>
+    <div class="top-menu">
+      <ul class="nav navbar-nav pull-right">
+        <li class="dropdown dropdown-user">
+          <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+            <img alt="{{ user.username }}" class="img-circle" src="{% static 'img/avatar-no.png' %}"/>
+            <span class="username username-hide-on-mobile">{{ user.username }}</span>
+            <i class="fa fa-angle-down"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-default">
+            <li>
+              <a href="{% url 'user:my_profile' %}">
+                <i class="icon-user"></i>
+                Thông tin của tôi
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'user:logout' %}">
+                <i class="fa fa-sign-out"></i>
+                Đăng xuất
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>

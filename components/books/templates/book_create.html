@@ -1,0 +1,174 @@
+{% extends 'layouts/master.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="page-content-wrapper">
+    <div class="page-content">
+      <div class="page-bar">
+        <ul class="page-breadcrumb">
+          <li>
+            <a href="http://handmade.pinky/admin/product">Sách</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="javascript:void(0)">Thêm mới</a>
+          </li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="portlet box green-haze">
+            <div class="portlet-title">
+              <div class="caption">Thêm mới sách</div>
+            </div>
+            <div class="portlet-body form">
+              <form method="POST" action="{% url 'book:book_create' %}" accept-charset="UTF-8" class="form-horizontal form-row-seperated" enctype="multipart/form-data" autocomplete="off">
+                {% csrf_token %}
+                <div class="form-body">
+                  <div class="form-group {% if 'name' in form.errors %} has-error {% endif %}">
+                    <label for="name" class="control-label col-md-3 required">Tên</label>
+                    <div class="col-md-9">
+                      <input class="form-control fashion-name" name="name" type="text" id="name" value="{{ request.POST.name }}">
+                      {% for error in form.errors.name %}
+                        <span class="help-block help-block-error">
+                            {{ error|escape }}
+                        </span>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <div class="form-group {% if 'author' in form.errors %} has-error {% endif %}">
+                    <label for="author" class="control-label col-md-3">Tác giả</label>
+                    <div class="col-md-9">
+                      <input class="form-control fashion-name" name="author" type="text" id="author" value="{{ request.POST.author }}">
+                      {% for error in form.errors.author %}
+                        <span class="help-block help-block-error">
+                            {{ error|escape }}
+                        </span>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <div class="form-group {% if 'description' in form.errors %} has-error {% endif %}">
+                    <label for="description" class="control-label col-md-3">Mô tả</label>
+                    <div class="col-md-9">
+                      <textarea style="width: 100%; padding: 10px" id="description" name="description" rows="10">{{ request.POST.description }}</textarea>
+                      {% for error in form.errors.description %}
+                        <span class="help-block help-block-error">
+                          {{ error|escape }}
+                      </span>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <div class="form-group {% if 'category' in form.errors %} has-error {% endif %}">
+                    <label for="category" class="control-label col-md-3">Danh mục</label>
+                    <div class="col-md-9">
+                      <select id="category" class="form-control bs-select" multiple name="category" data-none-selected-text="Chưa chọn danh mục nào">
+                        {% for category in categories %}
+                          <option value="{{ category.id }}">{{ category.name }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group {% if 'price' in form.errors %} has-error {% endif %}">
+                    <label for="price" class="control-label col-md-3">Giá</label>
+                    <div class="col-md-9">
+                      <div class="input-inline input-medium">
+                        <input class="form-control fashion-name" name="price" type="text" value="{{ request.POST.price|default:0 }}" id="price">
+                      </div>
+                      {% for error in form.errors.price %}
+                        <span class="help-block help-block-error">
+                            {{ error|escape }}
+                        </span>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <div class="form-group {% if 'number_page' in form.errors %} has-error {% endif %}">
+                    <label for="number_page" class="control-label col-md-3">Số trang</label>
+                    <div class="col-md-9">
+                      <div class="input-inline input-medium">
+                        <input class="form-control fashion-name" name="number_page" type="text" value="{{ request.POST.number_page|default:1 }}" id="number_page">
+                      </div>
+                      {% for error in form.errors.number_page %}
+                        <span class="help-block help-block-error">
+                            {{ error|escape }}
+                        </span>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <div class="form-group {% if 'publish_date' in form.errors %} has-error {% endif %}">
+                    <label for="publish_date" class="control-label col-md-3">Ngày xuất bản</label>
+                    <div class="col-md-9">
+                      <input class="form-control input-medium date-picker" data-date-format="yyyy/mm/dd" size="16" type="text" value="{{ request.POST.publish_date }}" name="publish_date"
+                             id="publish_date"/>
+                      {% for error in form.errors.publish_date %}
+                        <span class="help-block help-block-error">
+                            {{ error|escape }}
+                        </span>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <div class="form-group {% if 'image' in form.errors %} has-error {% endif %}">
+                    <label for="image" class="control-label col-md-3 required">Hình ảnh</label>
+                    <div class="col-md-9">
+                      <div class="fashion-image-upload">
+                        <img src="{% static 'img/no-image.png' %}" class="img-responsive" alt="">
+                      </div>
+                      <input class="fashion-upload-file" accept="image/*" name="image" type="file" id="image">
+                      {% for error in form.errors.image %}
+                        <span class="help-block help-block-error">
+                            {{ error|escape }}
+                        </span>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+                <div class="form-actions">
+                  <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                      <input class="btn green" type="submit" value="Thêm">
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block style %}
+  <link rel="stylesheet" href="{% static 'assets/global/plugins/bootstrap-datepicker/css/datepicker3.css' %}"/>
+{% endblock %}
+
+{% block script %}
+  <script src="{% static 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'assets/admin/pages/scripts/components-pickers.js' %}"></script>
+  <script>
+      jQuery(document).ready(function () {
+          FormSamples.init();
+          ComponentsDropdowns.init();
+          ComponentsPickers.init();
+
+          $("#price").TouchSpin({
+              buttondown_class: 'btn green',
+              buttonup_class: 'btn green',
+              min: 0,
+              max: 1000000000,
+              step: 1000,
+              stepinterval: 50,
+              maxboostedstep: 10000000,
+              postfix: 'đ'
+          });
+          $("#number_page").TouchSpin({
+              buttondown_class: 'btn green',
+              buttonup_class: 'btn green',
+              min: 1,
+              step: 1,
+              stepinterval: 50,
+              maxboostedstep: 10000000,
+              postfix: 'p'
+          });
+      });
+  </script>
+{% endblock %}

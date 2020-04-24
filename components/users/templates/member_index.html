@@ -1,0 +1,106 @@
+{% extends 'layouts/master.html' %}
+{% load static %}
+{% load user_extras %}
+
+{% block content %}
+  <div class="page-content-wrapper">
+    <div class="page-content">
+      <div class="page-bar">
+        <ul class="page-breadcrumb">
+          <li>
+            <a href="javascript:void(0)">Thành viên</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="javascript:void(0)">Danh sách</a>
+          </li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          {% include 'partials/alert_message.html' %}
+          <div class="portlet box green-haze">
+            <div class="portlet-title">
+              <div class="caption">
+                {{ title }}
+              </div>
+            </div>
+            <div class="portlet-body">
+              <table class="table table-striped table-bordered table-hover" id="sample_1">
+                <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Tên</th>
+                  <th>Email</th>
+                  <th>Vai trò</th>
+                  <th>Trạng thái</th>
+                  <th>Hành động</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for member in members %}
+                  <tr class="{% if member.id == user.id %} member-are-me {% endif %}">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ member.username }}</td>
+                    <td>{{ member.email }}</td>
+                    <td>{{ roles|get_item_dictionary:member.role }}</td>
+                    <td class="text-center">
+                      <span class="hide">{{ member.is_following }}</span>
+                      {% if member.id != user.id %}
+                        <span class="btn btn-sm default">
+                          <i
+                            class="fashion-toggle {{ icon_class|get_item_dictionary:member.is_following }}"
+                            data-url="{% url 'user:member_toggle_follow' following_id=member.id %}"
+                            data-screen="member_index"
+                            data-icon-class-create="{{ icon_class.1 }}"
+                            data-icon-class-delete="{{ icon_class.0 }}"
+                            data-message-create="Bạn đã theo dõi {{ member.username }}"
+                            data-message-delete="Bạn đã bõ theo dõi {{ member.username }}"
+                          >&nbsp;{{ status|get_item_dictionary:member.is_following }}
+                          </i>
+                        </span>
+                      {% else %}
+                        <i class="fa fa-eye"></i>&nbsp;<i class="fa fa-eye"></i>
+                      {% endif %}
+                    </td>
+                    <td>
+                      <a href="{% url 'book:book_index' %}?filter_sidebar=1&favorite=1&user_id={{ member.id }}" class="btn default btn-xs red">
+                        <i class="fa fa-book"></i>
+                        Sách yêu thích
+                      </a>
+                      <a href="{% url 'book:book_index' %}?filter_sidebar=1&read_status=1&user_id={{ member.id }}" class="btn default btn-xs green">
+                        <i class="fa fa-book"></i>
+                        Sách đang đọc
+                      </a>
+                      <a href="{% url 'book:book_index' %}?filter_sidebar=1&read_status=2&user_id={{ member.id }}" class="btn default btn-xs blue">
+                        <i class="fa fa-book"></i>
+                        Sách đã đọc
+                      </a>
+                      <a href="{% url 'user:member_index' %}?filter_sidebar=1&following=1&user_id={{ member.id }}" class="btn default btn-xs yellow">
+                        <i class="icon-users"></i>
+                        Đang theo dõi
+                      </a>
+                      <a href="{% url 'user:member_index' %}?filter_sidebar=1&follower=1&user_id={{ member.id }}" class="btn default btn-xs purple">
+                        <i class="icon-users"></i>
+                        Người theo dõi
+                      </a>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script>
+      jQuery(document).ready(function () {
+          TableAdvanced.init();
+      });
+  </script>
+{% endblock %}

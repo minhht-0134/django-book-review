@@ -1,0 +1,91 @@
+{% extends 'layouts/master.html' %}
+{% load static %}
+{% load user_extras %}
+
+{% block content %}
+  <div class="page-content-wrapper">
+    <div class="page-content">
+      <div class="page-bar">
+        <ul class="page-breadcrumb">
+          <li>
+            <a href="javascript:void(0)">Yêu cầu của tôi</a>
+          </li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          {% include 'partials/alert_message.html' %}
+          <div class="portlet box green-haze">
+            <div class="portlet-title">
+              <div class="caption">
+                Yêu cầu của tôi
+              </div>
+              <div class="actions">
+                {% if user.role == 1 %}
+                  <a href="{% url 'user:request_create' %}" id="sample_editable_1_new" class="btn green">
+                    <i class="fa fa-plus"></i>
+                    Thêm mới
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+            <div class="portlet-body">
+              <table class="table table-striped table-bordered table-hover" id="sample_1">
+                <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Nội dung</th>
+                  <th>Trạng thái</th>
+                  <th>Thời gian tạo</th>
+                  <th>Hành động</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for request_object in my_request %}
+                  <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ request_object.content }}</td>
+                    <td>{{ status|get_item_dictionary:request_object.status }}</td>
+                    <td>{{ request_object.created_at|date:'Y-m-d' }}</td>
+                    <td>
+                      <a href="{% url 'user:request_update' id=request_object.id %}" class="btn default btn-xs purple {% if request_object.status != 1 %}disabled{% endif %}">
+                        <i class="fa fa-edit"></i>
+                        Sửa
+                      </a>
+                      <span
+                        data-url="{% url 'user:request_delete' id=request_object.id %}"
+                        data-message="Xoá thành công"
+                        class="btn default btn-xs black fashion-soft-delete-item {% if request_object.status != 1 %}disabled{% endif %}"
+                        data-original-title="Bạn có chắc không"
+                        data-btn-ok-label="Đồng ý"
+                        data-btn-cancel-label="Không"
+                        data-toggle="confirmation"
+                        data-placement="left"
+                        data-popout="true"
+                        data-singleton="true"
+                        data-btn-ok-class="btn-success"
+                        data-btn-cancel-class="btn-danger"
+                      >
+                        <i class="fa fa-trash-o"></i>
+                        Xoá
+                      </span>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script>
+      jQuery(document).ready(function () {
+          TableAdvanced.init();
+      });
+  </script>
+{% endblock %}

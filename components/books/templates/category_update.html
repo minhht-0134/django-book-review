@@ -1,0 +1,62 @@
+{% extends 'layouts/master.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="page-content-wrapper">
+    <div class="page-content">
+      <div class="page-bar">
+        <ul class="page-breadcrumb">
+          <li>
+            <a href="javascript:void(0)">Danh mục</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="javascript:void(0)">Chỉnh sửa</a>
+          </li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="portlet box green-haze">
+            <div class="portlet-title">
+              <div class="caption">Chỉnh sửa danh mục</div>
+            </div>
+            <div class="portlet-body form">
+              <form method="POST" action="{% url 'book:category_update' id=category.id %}" accept-charset="UTF-8" class="form-horizontal form-row-seperated">
+                {% csrf_token %}
+                <div class="form-body">
+                  <div class="form-group {% if 'name' in form.errors %} has-error {% endif %}">
+                    <label for="name" class="control-label col-md-3 required">Tên</label>
+                    <div class="col-md-9">
+                      <input class="form-control fashion-name" name="name" type="text" id="name" value="{{ request.POST.name|default:category.name }}">
+                      {% for error in form.errors.name %}
+                        <span class="help-block help-block-error">
+                            {{ error|escape }}
+                        </span>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+                <div class="form-actions">
+                  <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                      <input class="btn green" type="submit" value="Cập nhật">
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script>
+      jQuery(document).ready(function () {
+          FormSamples.init();
+      });
+  </script>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'auth/master.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="content">
+    <form method="POST" action="{% url 'user:login' %}" accept-charset="UTF-8" class="login-form">
+      {% csrf_token %}
+      <h4 class="form-title">Đăng nhập vào tài khoản của bạn</h4>
+      {% if form.non_field_errors %}
+        <div class="has-error">
+          {% for error in form.non_field_errors %}
+            <span class="help-block">{{ error|escape }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+      <div class="form-group {% if 'email' in form.errors %} has-error {% endif %}">
+        <label for="email" class="control-label visible-ie8 visible-ie9">Tài khoản</label>
+        <div class="input-icon">
+          <i class="fa fa-user"></i>
+          <input class="form-control placeholder-no-fix" autocomplete="off" placeholder="Tài khoản" name="email" type="text" id="email" value="{{ request.POST.email }}">
+          {% for error in form.errors.email %}
+            <span class="help-block">{{ error|escape }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="form-group {% if 'password' in form.errors %} has-error {% endif %}">
+        <label for="password" class="control-label visible-ie8 visible-ie9">Mật khẩu</label>
+        <div class="input-icon">
+          <i class="fa fa-lock"></i>
+          <input class="form-control placeholder-no-fix" autocomplete="off" placeholder="Mật khẩu" name="password" type="password" value="" id="password">
+          {% for error in form.errors.password %}
+            <span class="help-block">{{ error|escape }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn blue pull-right" type="submit">
+          Đăng nhập
+          <i class="m-icon-swapright m-icon-white"></i>
+        </button>
+      </div>
+      <div class="create-account">
+        <p>
+          Vẫn chưa có tài khoản ?
+          <a href="{% url 'user:register' %}">
+            Tạo một tài khoản
+          </a>
+        </p>
+      </div>
+    </form>
+  </div>
+{% endblock %}

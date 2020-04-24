@@ -1,0 +1,55 @@
+.fashion-full-with {
+    width: 100% !important;
+}
+
+.comment-input {
+    display: none;
+}
+
+.fashion-comment-input .comment-body {
+    padding-right: 75px;
+}
+
+.fix-relative {
+    position: relative;
+}
+
+.fix-comment {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.fashion-link {
+    color: #E02222 !important;
+}
+
+.a-fix {
+    color: rgb(62, 77, 92);
+}
+
+.a-fix:hover {
+    text-decoration: none;
+}
+
+.fashion-product-pop-up {
+    display: none;
+    width: 700px;
+}
+
+.fashion-product-comment p {
+    margin-bottom: 20px;
+}
+
+.cart-pop {
+    height: 250px;
+}
+
+.cart-pop img {
+    width: 40px;
+    height: auto;
+}
+
+.site-logo img {
+    width: 45px;
+}

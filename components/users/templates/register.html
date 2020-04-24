@@ -1,0 +1,70 @@
+{% extends 'auth/master.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="content">
+    <form method="POST" action="{% url 'user:register' %}" accept-charset="UTF-8" class="register-form">
+      {% csrf_token %}
+      <h3>Đăng kí tài khoản</h3>
+      {% if form.non_field_errors %}
+        <div class="has-error">
+          {% for error in form.non_field_errors %}
+            <span class="help-block">{{ error|escape }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+      <p>Thông tin cá nhân</p>
+      <div class="form-group {% if 'username' in form.errors %} has-error {% endif %}">
+        <label for="username" class="control-label visible-ie8 visible-ie9">Tên</label>
+        <div class="input-icon">
+          <i class="fa fa-font"></i>
+          <input class="form-control placeholder-no-fix" placeholder="Tên" name="username" type="text" id="username" value="{{ request.POST.username }}">
+          {% for error in form.errors.username %}
+            <span class="help-block">{{ error|escape }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="form-group {% if 'email' in form.errors %} has-error {% endif %}">
+        <label for="email" class="control-label visible-ie8 visible-ie9">Email</label>
+        <div class="input-icon">
+          <i class="fa fa-envelope"></i>
+          <input class="form-control placeholder-no-fix" autocomplete="off" placeholder="Email" name="email" type="email" id="email" value="{{ request.POST.email }}">
+          {% for error in form.errors.email %}
+            <span class="help-block">{{ error|escape }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      <p>Mật khẩu</p>
+      <div class="form-group {% if 'password1' in form.errors %} has-error {% endif %}">
+        <label for="password" class="control-label visible-ie8 visible-ie9">Mật khẩu</label>
+        <div class="input-icon">
+          <i class="fa fa-lock"></i>
+          <input class="form-control placeholder-no-fix" autocomplete="off" id="password" placeholder="Mật khẩu" name="password1" type="password" value="">
+          {% for error in form.errors.password1 %}
+            <span class="help-block">{{ error|escape }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="form-group {% if 'password2' in form.errors %} has-error {% endif %}">
+        <label for="password_confirmation" class="control-label visible-ie8 visible-ie9">Nhập lại mật khẩu mới</label>
+        <div class="input-icon">
+          <i class="fa fa-check"></i>
+          <input class="form-control placeholder-no-fix" autocomplete="off" placeholder="Nhập lại mật khẩu" name="password2" type="password" value="" id="password_confirmation">
+          {% for error in form.errors.password2 %}
+            <span class="help-block">{{ error|escape }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="form-actions">
+        <a href="{% url 'user:login' %}" class="btn btn-default">
+          <i class="m-icon-swapleft"></i>
+          Quay lại
+        </a>
+        <button type="submit" class="btn blue pull-right">
+          Đăng kí
+          <i class="m-icon-swapright m-icon-white"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+{% endblock %}
