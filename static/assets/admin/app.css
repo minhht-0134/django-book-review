@@ -1,70 +1,74 @@
 .fashion-image-upload {
-    width: 30%;
-    border: 1px solid #ddd;
-    padding: 5px;
-    margin-bottom: 7px;
+  width: 30%;
+  border: 1px solid #ddd;
+  padding: 5px;
+  margin-bottom: 7px;
 }
 
 .fashion-image-upload img {
-    width: 100%;
+  width: 100%;
 }
 
 .fashion-fix-image {
-    width: 15%;
+  width: 15%;
 }
 
 .fashion-fix-image-product {
-    width: 5%;
+  width: 5%;
 }
 
 .fashion-fix-image img {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 .fix-feature {
-    font-size: 20px;
-    padding: 10px;
-    cursor: pointer;
+  font-size: 20px;
+  padding: 10px;
+  cursor: pointer;
 }
 
 .feature-color {
-    color: #ffcd76;
+  color: #ffcd76;
 }
 
 .fashion-fix-image-order-detail {
-    width: 15%;
+  width: 15%;
 }
 
 .page-logo img {
-    width: 50px;
+  width: 50px;
 }
 
 .fashion-time-fix {
-    width: 130px !important;
-    margin-left: -130px !important;
+  width: 130px !important;
+  margin-left: -130px !important;
 }
 
 .page-header.navbar .top-menu .navbar-nav > li.dropdown-notification .dropdown-menu .dropdown-menu-list > li a .time {
-    max-width: 111px;
+  max-width: 111px;
 }
 
 .fashion-notification {
-    height: 250px
+  height: 250px
 }
 
 .unread {
-    background: #f8f9fa;
+  background: #f8f9fa;
 }
 
 .pinky-book-favorite-color {
-    color: #ff3d3a;
+  color: #ff3d3a;
 }
 
 .pinky-cursor-disable {
-    cursor: not-allowed!important;
+  cursor: not-allowed !important;
 }
 
 .member-are-me {
-    background-color: cornsilk !important;
-    color: brown;
+  background-color: cornsilk !important;
+  color: brown;
+}
+
+.table .btn {
+  margin-bottom: 5px;
 }

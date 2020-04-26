@@ -97,7 +97,7 @@
                   <div class="form-group {% if 'publish_date' in form.errors %} has-error {% endif %}">
                     <label for="publish_date" class="control-label col-md-3">Ngày xuất bản</label>
                     <div class="col-md-9">
-                      <input class="form-control input-medium date-picker" data-date-format="yyyy/mm/dd" size="16" type="text" value="{{ request.POST.publish_date }}" name="publish_date"
+                      <input class="form-control input-medium date-picker" placeholder="yyyy/mm/dd" data-date-format="yyyy/mm/dd" size="16" type="text" value="{{ request.POST.publish_date }}" name="publish_date"
                              id="publish_date"/>
                       {% for error in form.errors.publish_date %}
                         <span class="help-block help-block-error">

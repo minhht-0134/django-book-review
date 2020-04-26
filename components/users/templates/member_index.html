@@ -29,7 +29,7 @@
               <table class="table table-striped table-bordered table-hover" id="sample_1">
                 <thead>
                 <tr>
-                  <th>STT</th>
+                  <th>Hình ảnh</th>
                   <th>Tên</th>
                   <th>Email</th>
                   <th>Vai trò</th>
@@ -40,7 +40,9 @@
                 <tbody>
                 {% for member in members %}
                   <tr class="{% if member.id == user.id %} member-are-me {% endif %}">
-                    <td>{{ forloop.counter }}</td>
+                    <td class="fashion-fix-image-product">
+                        <img src="{% static 'img/avatar-no.png' %}" class="img-responsive">
+                    </td>
                     <td>{{ member.username }}</td>
                     <td>{{ member.email }}</td>
                     <td>{{ roles|get_item_dictionary:member.role }}</td>

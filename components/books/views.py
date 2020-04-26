@@ -150,7 +150,8 @@ class BookIndexView(View):
         sql = f"SELECT {book_columns}," \
               "IF(favorite.id, 1, 0) is_favorite," \
               "COALESCE(read_status.status, 0) AS read_status," \
-              "COALESCE(AVG(review.rating), 0) AS rating " \
+              "COALESCE(AVG(review.rating), 0) AS rating, " \
+              "COUNT(review.id) AS total_reviews " \
               "FROM book " \
               "LEFT JOIN favorite " \
               f"ON book.id = favorite.book_id AND favorite.user_id = {user_id} " \

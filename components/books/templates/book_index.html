@@ -60,8 +60,9 @@
                     <td>{{ book.price|default_if_none:0|intcomma }}đ</td>
                     <td>{{ book.number_page|default_if_none:1 }}</td>
                     <td>{{ book.publish_date|default_if_none:'' }}</td>
-                    <td>
+                    <td class="text-center">
                       <div class="rateit pinky-cursor-disable" data-rateit-value="{{ book.rating }}" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                      <div>({{ book.total_reviews }} đánh giá)</div>
                     </td>
                     <td>
                       <span class="hide">{{ book.read_status }}</span>
@@ -112,7 +113,7 @@
                           Xoá
                         </span>
                       {% endif %}
-                      <a href="" class="btn default btn-xs red-stripe">Xem chi tiết</a>
+                      <a href="" class="btn default btn-xs red-stripe">Chi tiết</a>
                     </td>
                     <td class="display-none">
                       {{ book.description|default_if_none:'' }}
