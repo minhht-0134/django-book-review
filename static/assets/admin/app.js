@@ -142,9 +142,9 @@ $(document).ready(function () {
                     if (screen === 'request_index') {
                         item.val(3);
                         item.parents('tr')
-                            .children('.pinky-book-action')
-                            .children('span')
-                            .addClass('disabled');
+                        .children('.pinky-book-action')
+                        .children('span')
+                        .addClass('disabled');
                         return;
                     }
                 },
@@ -153,9 +153,9 @@ $(document).ready(function () {
 
                     if (screen === 'request_index' && status === 3) {
                         item.parents('tr')
-                            .children('.pinky-book-action')
-                            .children('span')
-                            .addClass('disabled');
+                        .children('.pinky-book-action')
+                        .children('span')
+                        .addClass('disabled');
                         return;
                     }
 
@@ -197,16 +197,16 @@ $(document).ready(function () {
                     grow(message, 'success');
 
                     item.parents('tr')
-                        .children('.fashion-time')
-                        .css('color', 'green')
-                        .css('font-weight', 'bold')
-                        .html(result.time);
+                    .children('.fashion-time')
+                    .css('color', 'green')
+                    .css('font-weight', 'bold')
+                    .html(result.time);
 
                     item.parents('tr')
-                        .children('.fashion-user')
-                        .css('color', 'green')
-                        .css('font-weight', 'bold')
-                        .html(result.user_name);
+                    .children('.fashion-user')
+                    .css('color', 'green')
+                    .css('font-weight', 'bold')
+                    .html(result.user_name);
                 }
             }
         });
@@ -236,7 +236,7 @@ $(document).ready(function () {
 
                     if (result.responseText === 'create') {
                         item.removeClass(icon_class_delete)
-                            .addClass(icon_class_create);
+                        .addClass(icon_class_create);
 
                         if (screen === 'member_index') {
                             item.html("&nbsp;Đang theo dõi")
@@ -246,7 +246,7 @@ $(document).ready(function () {
                     }
                     if (result.responseText === 'delete') {
                         item.removeClass(icon_class_create)
-                            .addClass(icon_class_delete);
+                        .addClass(icon_class_delete);
 
                         if (screen === 'member_index') {
                             item.html("&nbsp;Theo dõi")
@@ -310,7 +310,7 @@ $(document).ready(function () {
     nestable_list_1.nestable({group: 1, maxDepth: maxDepth}).change(updateOutput);
 
     updateOutput(nestable_list_1);
-    
+
     $('.fashion-save-sort-order').click(function () {
         let url = $(this).attr('data-url');
         let message = $(this).attr('data-message');
@@ -331,6 +331,92 @@ $(document).ready(function () {
                 },
                 200: function () {
                     grow(message, 'success');
+                }
+            }
+        });
+    });
+
+    $('#book-detail-comment-create').click(function () {
+        let url = $(this).data('url');
+        let content = $('#book-detail-comment-content').val();
+        let username = $(this).data('username');
+        let avatar = $(this).data('avatar');
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: {
+                content
+            },
+            dataType: 'json',
+            statusCode: {
+                404: function () {
+                    grow('error', 'danger');
+                },
+                200: function () {
+                    $('#book-detail-comment-content').val('');
+                    $('#book-detail-comment-main').append(`
+                        <div class="media">
+                          <span class="pull-left">
+                            <img alt="" src="${avatar}" class="media-object">
+                          </span>
+                          <div class="media-body">
+                            <h4 class="media-heading">
+                              ${username}
+                            </h4>
+                            <p>${content}</p>
+                          </div>
+                        </div>
+                    `);
+                }
+            }
+        });
+    });
+
+    $('#book-detail-review-create').click(function () {
+        let url = $(this).data('url');
+        let content = $('#book-detail-review-content').val();
+        let rating = $('.book-detail-review-rating').val();
+        let username = $(this).data('username');
+        let avatar = $(this).data('avatar');
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: {
+                content,
+                rating
+            },
+            dataType: 'json',
+            statusCode: {
+                404: function () {
+                    grow('error', 'danger');
+                },
+                200: function () {
+                    $('#book-detail-review-content').val('');
+                    $('#book-detail-review-main').append(`
+                        <div class="media">
+                          <span class="pull-left">
+                            <img alt="" src="${avatar}" class="media-object">
+                          </span>
+                          <div class="media-body">
+                            <h4 class="media-heading">
+                              ${username}
+                              <span>
+                                <div
+                                    class="rateit"
+                                    data-rateit-value="${rating}"
+                                    data-rateit-ispreset="true"
+                                    data-rateit-readonly="true"
+                                  >
+                                  </div>
+                              </span>
+                            </h4>
+                            <p>${content}</p>
+                          </div>
+                        </div>
+                    `);
+                    $('div.rateit, span.rateit').rateit();
                 }
             }
         });

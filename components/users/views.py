@@ -172,6 +172,9 @@ class MemberToggleFollowView(View):
         if follow:
             follow.delete()
         else:
+            if following_id == request.user.id:
+                return HttpResponseForbidden('403 Forbidden')
+
             Follow.objects.create(follower=request.user, following_id=following_id)
 
         return HttpResponse('delete' if follow else 'create')

@@ -2,5 +2,157 @@
 {% load static %}
 
 {% block content %}
+  <div class="page-content-wrapper">
+    <div class="page-content">
+      <div class="page-bar">
+        <ul class="page-breadcrumb">
+          <li>
+            <a href="javascript:void(0)">Thư viện sách</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="javascript:void(0)">Chi tiết</a>
+          </li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-12 news-page blog-page">
+          <div class="row">
+            <div class="col-md-12 blog-tag-data">
+              <h3>{{ book.name }}</h3>
+              {% if book.image %}
+                <img src="/media/{{ book.image }}" class="img-responsive" style="width: 100%" alt="">
+              {% endif %}
+              <div class="news-item-page">
+                {{ book.description }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="portlet-body">
+            <div class="tabbable-line">
+              <ul class="nav nav-tabs ">
+                <li class="active">
+                  <a href="#tab_15_1" data-toggle="tab">
+                    Bình luận
+                  </a>
+                </li>
+                <li>
+                  <a href="#tab_15_2" data-toggle="tab">
+                    Đánh giá
+                  </a>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane active" id="tab_15_1">
+                  <div class="news-page blog-page">
+                    <div class="blog-tag-data">
+                      <div id="book-detail-comment-main">
+                        {% for comment in comments %}
+                          <div class="media">
+                          <span class="pull-left">
+                            <img alt="" src="{% static 'img/avatar-no.png' %}" class="media-object">
+                          </span>
+                            <div class="media-body">
+                              <h4 class="media-heading">
+                                {{ comment.user.username }}
+                              </h4>
+                              <p>{{ comment.content }}</p>
+                            </div>
+                          </div>
+                        {% endfor %}
+                      </div>
+                      <hr>
+                      <div class="post-comment">
+                        <div class="form-group">
+                          <textarea id="book-detail-comment-content" class="col-md-10 form-control" rows="4"></textarea>
+                        </div>
+                        <span
+                          id="book-detail-comment-create"
+                          class="margin-top-20 btn green"
+                          data-username="{{ user.username }}"
+                          data-avatar="{% static 'img/avatar-no.png' %}"
+                          data-url="{% url 'book:book_create_comment' id=book.id %}"
+                        >
+                          Gửi
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab_15_2">
+                  <div class="news-page blog-page">
+                    <div class="blog-tag-data">
+                      <div id="book-detail-review-main">
+                        {% for review in reviews %}
+                          <div class="media">
+                            <span class="pull-left">
+                              <img alt="" src="{% static 'img/avatar-no.png' %}" class="media-object">
+                            </span>
+                            <div class="media-body">
+                              <h4 class="media-heading">
+                                {{ review.user.username }}
+                                <span>
+                                  <div
+                                    class="rateit"
+                                    data-rateit-value="{{ review.rating }}"
+                                    data-rateit-ispreset="true"
+                                    data-rateit-readonly="true"
+                                  >
+                                  </div>
+                                </span>
+                              </h4>
+                              <p>{{ review.content }}</p>
+                            </div>
+                          </div>
+                        {% endfor %}
+                      </div>
+                      <hr>
+                      <div class="post-comment">
+                        <div class="form-group">
+                          <label for="backing5">Xếp hạng</label>
+                          <input type="range" value="5" step="1" id="backing5" class="book-detail-review-rating">
+                          <div
+                            class="rateit"
+                            data-rateit-backingfld="#backing5"
+                            data-rateit-resetable="false"
+                            data-rateit-ispreset="true"
+                            data-rateit-min="0"
+                            data-rateit-max="5"
+                          >
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <textarea id="book-detail-review-content" class="col-md-10 form-control" rows="4"></textarea>
+                        </div>
+                        <span
+                          id="book-detail-review-create"
+                          class="margin-top-20 btn green"
+                          data-username="{{ user.username }}"
+                          data-avatar="{% static 'img/avatar-no.png' %}"
+                          data-url="{% url 'book:book_create_review' id=book.id %}"
+                        >
+                          Gửi
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
 
+{% block style %}
+  <link rel="stylesheet" href="{% static 'assets/admin/pages/css/news.css' %}"/>
+  <link rel="stylesheet" href="{% static 'assets/admin/pages/css/blog.css' %}"/>
+{% endblock %}
+
+{% block script %}
+  <script src="{% static 'assets/global/plugins/rateit/src/jquery.rateit.js' %}"></script>
 {% endblock %}

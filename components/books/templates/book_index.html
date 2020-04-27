@@ -39,7 +39,7 @@
                   <th>Tác giả</th>
                   <th>Giá</th>
                   <th>Số trang</th>
-                  <th>Ngày xuất bản</th>
+                  <th>NXB</th>
                   <th>Xếp hạng</th>
                   <th>Trạng thái</th>
                   <th class="text-center">Yêu thích</th>
@@ -55,7 +55,11 @@
                         <img src="/media/{{ book.image }}" class="img-responsive">
                       {% endif %}
                     </td>
-                    <td>{{ book.name }}</td>
+                    <td>
+                      <a href="{% url 'book:book_detail' id=book.id %}">
+                        {{ book.name }}
+                      </a>
+                    </td>
                     <td>{{ book.author|default_if_none:'' }}</td>
                     <td>{{ book.price|default_if_none:0|intcomma }}đ</td>
                     <td>{{ book.number_page|default_if_none:1 }}</td>
@@ -113,7 +117,9 @@
                           Xoá
                         </span>
                       {% endif %}
-                      <a href="" class="btn default btn-xs red-stripe">Chi tiết</a>
+                      <a href="{% url 'book:book_detail' id=book.id %}" class="btn default btn-xs red-stripe">
+                        Chi tiết
+                      </a>
                     </td>
                     <td class="display-none">
                       {{ book.description|default_if_none:'' }}

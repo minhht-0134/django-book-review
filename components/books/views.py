@@ -9,7 +9,9 @@ from .models import (
     Category,
     Book,
     ReadStatus,
-    Favorite
+    Favorite,
+    Comment,
+    Review
 )
 from ..users.decorators import admin_required
 from .forms import (
@@ -258,5 +260,36 @@ class BookDetailView(View):
     def get(self, request, *args, **kwargs):
         book_id = kwargs.get('id')
         book = get_object_or_404(Book, pk=book_id)
+        comments = Comment.objects.filter(book_id=book_id).select_related('user').all()
+        reviews = Review.objects.filter(book_id=book_id).select_related('user').all()
 
-        return render(request, self.template_name, {'book': book})
+        return render(request, self.template_name, {
+            'book': book,
+            'comments': comments,
+            'reviews': reviews
+        })
+
+
+class CommentCreateView(View):
+    @method_decorator(login_required)
+    def post(self, request, *args, **kwargs):
+        Comment.objects.create(
+            book_id=kwargs.get('id'),
+            content=request.POST.get('content'),
+            user=request.user
+        )
+
+        return HttpResponse('ok')
+
+
+class ReviewCreateView(View):
+    @method_decorator(login_required)
+    def post(self, request, *args, **kwargs):
+        Review.objects.create(
+            book_id=kwargs.get('id'),
+            content=request.POST.get('content'),
+            rating=request.POST.get('rating'),
+            user=request.user
+        )
+
+        return HttpResponse('ok')

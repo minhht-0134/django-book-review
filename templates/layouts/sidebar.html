@@ -1,5 +1,3 @@
-{% load sidebar_extras %}
-
 <div class="page-sidebar-wrapper">
   <div class="page-sidebar navbar-collapse collapse">
     <ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
@@ -92,7 +90,9 @@
       <li class="{% if '/request' in request.path %}active{% endif %}">
         <a href="javascript:void(0);">
           <i class="fa fa-th"></i>
-          <span class="title">Quản lý yêu cầu</span>
+          <span class="title">
+            Quản lý yêu cầu
+          </span>
           {% if '/request' in request.path %}
             <span class="selected"></span>
           {% endif %}
@@ -125,7 +125,7 @@
       <li class="{% if '/member' in request.path %}active{% endif %}">
         <a href="javascript:void(0);">
           <i class="icon-users"></i>
-          <span class="title">Thành viên ({% get_total_member %})</span>
+          <span class="title">Thành viên</span>
           {% if '/member' in request.path %}
             <span class="selected"></span>
           {% endif %}
